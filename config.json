@@ -1,0 +1,16 @@
+{
+    "app": 3001,
+
+    "host": "140.238.184.159",
+    "user": "gabriel",
+    "password": "chiocheti",
+    "database": "gestON",
+    "port": 3306,
+
+    "apiKey": "AIzaSyBf0DSUQdh_qPNKzVDcxVAtInKSup-EYu0",
+    "authDomain": "geston-6ffd6.firebaseapp.com",
+    "projectId": "geston-6ffd6",
+    "storageBucket": "geston-6ffd6.appspot.com",
+    "messagingSenderId": "312277124039",
+    "appId": "1:312277124039:web:a8355ce40582977e60cfe2"
+}
