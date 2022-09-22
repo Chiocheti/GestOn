@@ -9,74 +9,19 @@ import {
     Box,
     Center,
     Stack,
-    useToast,
 } from '@chakra-ui/react';
 
 import NavbarLogOn from '../components/navbarLogOnConsumidor';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import UseAuth from '../hooks/useAuth'
-import Router from "next/router";
-import Axios from 'axios';
-import React, { useState } from 'react';
 
 
 export default function autentificadoConsumidor() {
 
     const { user, signin, signout } = UseAuth();
-
-    var [idC, setIdC] = useState('idC preset');
-    var [cpf, setCPF] = useState('CPF preset');
-    var [nome, setNome] = useState('Nome preset');
-    var [telefone, setTelefone] = useState('Telefone preset');
-
-    var usuario = null
-
-    console.log("Pagina de Autentificação do Usuario")
     console.log(user);
-
-    async function loadUser() {
-        const options = {
-            method: 'GET',
-            url: `http://localhost:3000/api/usuario/cadastro/${user.email}/consumidor`
-        };
-        await Axios.request(options).then(function (response) {
-            console.log(response.data);
-            usuario = response.data;
-            console.log("Usuario: ");
-            console.log(usuario);
-        }).catch(function (error) {
-            console.log("Erro do sistema: " + error);
-        });
-
-        await loadConsumidor(usuario.id);
-    }
-
-    async function loadConsumidor(id) {
-        const options = {
-            method: 'GET',
-            url: `http://localhost:3000/api/consumidor/${id}`
-        };
-        await Axios.request(options).then(function (response) {
-            console.log(response.data);
-            setIdC(response.data.idConsumidor);
-            setCPF(response.data.CPF);
-            setNome(response.data.nome);
-            setTelefone(response.data.telefone);
-            console.log("Consumidor: ");
-            console.log("idC:" + idC);
-            console.log("nome:" + nome);
-            console.log("cpf:" + cpf);
-            console.log("telefone:" + telefone);
-
-        }).catch(function (error) {
-            console.log("Erro do sistema: " + error);
-        });
-    }
-
-    loadUser();
-
     return (
-        <div>
+        <>
             <NavbarLogOn />
             <Box textAlign="center" py={10} px={6}>
                 <CheckCircleIcon boxSize={'50px'} color={'green.500'} />
@@ -105,7 +50,7 @@ export default function autentificadoConsumidor() {
                                 objectFit="cover"
                                 boxSize="100%"
                                 src={
-                                    user.photoURL
+                                    'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-PNG.png'
                                 }
                             />
                         </Flex>
@@ -116,40 +61,45 @@ export default function autentificadoConsumidor() {
                             alignItems="center"
                             p={1}
                             pt={2}>
-                            <Heading fontSize={'2xl'} fontFamily={'body'}
-                                id='nome'>
-                                Nome: {nome}
+                            <Heading fontSize={'2xl'} fontFamily={'body'}>
+                                Nome da pessoa
                             </Heading>
                             <Text fontWeight={600} color={'gray.500'} size="sm" mb={4}>
-                                Email: {user.email}
+                                @email da pessoa
                             </Text>
+                            <Text
+                                textAlign={'center'}
+                                color={useColorModeValue('gray.700', 'gray.400')}
+                                px={3}>
+                                Endereço, Rua, bairro,cidade e Estado. CEP
+                                <Text href={'#'} color={'blue.400'}>
+                                    Dados Cadastrados
+                                </Text>
+                            </Text>
+                            <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+                                <Badge
+                                    px={2}
+                                    py={1}
+                                    bg={useColorModeValue('gray.50', 'gray.800')}
+                                    fontWeight={'400'}>
+                                    #CPF
+                                </Badge>
+                                <Badge
+                                    px={2}
+                                    py={1}
+                                    bg={useColorModeValue('gray.50', 'gray.800')}
+                                    fontWeight={'400'}>
+                                    #Telefone
+                                </Badge>
+                                <Badge
+                                    px={2}
+                                    py={1}
+                                    bg={useColorModeValue('gray.50', 'gray.800')}
+                                    fontWeight={'400'}>
+                                    #Cons ou Forn
+                                </Badge>
+                            </Stack>
 
-                            <Text href={'#'} color={'blue.400'}>
-                                Dados Cadastrados
-                            </Text>
-                            <Badge
-                                px={2}
-                                py={1}
-                                bg={useColorModeValue('gray.50', 'gray.800')}
-                                fontWeight={'400'}
-                                id='CPF'>
-                                CPF: {cpf}
-                            </Badge>
-                            <Badge
-                                px={2}
-                                py={1}
-                                bg={useColorModeValue('gray.50', 'gray.800')}
-                                fontWeight={'400'}
-                                id='telefone'>
-                                Telefone: {telefone}
-                            </Badge>
-                            <Badge
-                                px={2}
-                                py={1}
-                                bg={useColorModeValue('gray.50', 'gray.800')}
-                                fontWeight={'400'}>
-                                Tipo de Conta: Consumidor
-                            </Badge>
                             <Stack
                                 width={'100%'}
                                 mt={'2rem'}
@@ -190,6 +140,6 @@ export default function autentificadoConsumidor() {
                 </Center>
 
             </Box>
-        </div>
+        </>
     )
 }

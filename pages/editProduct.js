@@ -1,34 +1,35 @@
 import {
-    Button,
-    Checkbox,
     Flex,
     Tag,
-    FormControl,
-    FormLabel,
     Input,
     Avatar,
-    Link,
+    FormControl,
     Stack,
     IconButton,
     ButtonGroup,
     Heading,
-    Center,
     Editable,
     EditableInput,
     EditablePreview,
     useEditableControls,
-    Image,
-    keyframes
+    keyframes,
+    Center,
+    FormLabel,
+    Switch,
+    Checkbox,
+    CheckboxGroup,
 } from '@chakra-ui/react';
 
 import UseAuth from '../hooks/useAuth'
-import NavbarLogOn from '../components/navbarLogOnConsumidor';
-import { AspectRatio, useToast } from '@chakra-ui/react'
+import NavbarLogOn from '../components/navbarLogOnFornecedor';
+import Saporra from '../components/cardProduto';
+import { useToast } from '@chakra-ui/react'
+import React from 'react';
 import Axios from 'axios';
 import Router from "next/router";
-import { EditIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import { EditIcon, CheckIcon, CloseIcon, FcLike, FcCurrencyExchange, FcInfo } from '@chakra-ui/icons';
 
-export default function autentificado() {
+export default function editProdrutro() {
 
     const { user, signin, signout } = UseAuth();
     console.log(user);
@@ -37,17 +38,10 @@ export default function autentificado() {
 
     const options = {
         method: 'GET',
-        url: `http://localhost:3000/api/usuario/cadastro/${user.email}/consumidor`
+        url: `http://localhost:3000/api/usuario/cadastro/${user.email}/fornecedor`
     };
     Axios.request(options).then(function (response) {
         console.log(response.data);
-        toast({
-            title: 'Login efetuado com sucesso',
-            description: `Seja bem vindo de volta!`,
-            status: 'success',
-            duration: 3000,
-            isClosable: true,
-        })
     }).catch(function (error) {
         console.log(error);
         toast({
@@ -88,6 +82,20 @@ export default function autentificado() {
         100% {opacity: 0;}
     `;
 
+    const [show, setShow] = React.useState(false)
+
+    const handleToggle = () => setShow(!show)
+
+    const property = {
+        nome: "Saca de grãos de milho",
+        descricaoLonga: "Saca de 20k de grão de milho americanos",
+        descricaoCurta: "Saca de 20k de milho",
+        linkImg: "https://agristore.com/image/cache/catalog/Di%20Solo/milho-ipanema-20kg-1200x1200.png",
+        marca: "Milho Ipanema",
+        preco: "R$99,99"
+
+    }
+
     return (
         <>
             <NavbarLogOn />
@@ -97,73 +105,60 @@ export default function autentificado() {
                     flex={1}
                     lign={'center'}
                     justify={'center'}
+                    boxShadow={'lg'}
                 >
                     <Stack spacing={4} w={'full'} maxW={'md'}>
                         <Stack direction={['column', 'row']} spacing={6}>
                             <Center>
                                 <Flex>
-                                    <Avatar size="xl" src={user.photoURL} />
+                                    <Avatar size="xl" src={property.linkImg} />
                                 </Flex>
                             </Center>
                             <Center w="full">
-                                <Tag colorScheme='teal' w="full">
-                                    Consumidor
+                                <Tag borderRadius='full' colorScheme='teal' fontSize='10px'>
+                                    AGRICOLA
+                                </Tag>
+                                <Tag borderRadius='full' colorScheme='teal' fontSize='10px'>
+                                    MILHO
+                                </Tag>
+                                <Tag borderRadius='full' colorScheme='teal' fontSize='10px'>
+                                    PLANTIO
                                 </Tag>
                             </Center>
                         </Stack>
-                        <Heading fontSize={'2xl'}>E-mail da pessoa</Heading>
                         <Stack spacing={6}>
 
-
+                            <Heading fontSize={'2xl'}>Valor</Heading>
                             <Editable
-                                spacing={6}
                                 textAlign='center'
-                                defaultValue='Samuel Araújo dos Santos'
+                                defaultValue='100,00 conto'
                                 fontSize='2xl'
                                 isPreviewFocusable={false}>
                                 <EditablePreview />
                                 <Input as={EditableInput} />
                                 <EditableControls />
                             </Editable>
-
-                            <Heading fontSize={'2xl'}>CPF : 123.456.789-10</Heading>
-
-                            <Editable
-                                textAlign='center'
-                                defaultValue='(19)19998-99578'
-                                fontSize='2xl'
-                                isPreviewFocusable={false}>
-                                <EditablePreview />
-                                <Input as={EditableInput} />
-                                <EditableControls />
-                            </Editable>
-
-
-                            <Stack spacing={6}>
-                                <Stack
-                                    direction={{ base: 'column', sm: 'row' }}
-                                    align={'start'}
-                                    justify={'space-between'}>
-
+                            <Heading fontSize={'2xl'}>Defina as categorias</Heading>
+                            <CheckboxGroup colorScheme='green' defaultValue={['agricola']}>
+                                <Stack spacing={[1, 5]} direction={['column', 'row']}>
+                                    <Checkbox value='agricola'>Agricola</Checkbox>
+                                    <Checkbox value='milho'>Milho</Checkbox>
+                                    <Checkbox value='plantio'>Plantio</Checkbox>
                                 </Stack>
-
-                            </Stack>
-
+                            </CheckboxGroup>
+                            <FormControl display='flex' alignItems='center'>
+                                <FormLabel htmlFor='Sumemo' mb='1'>
+                                    Produto em estoque?
+                                </FormLabel>
+                                <Switch id='Sumemo' />
+                            </FormControl>
                         </Stack>
                     </Stack>
                 </Flex>
                 <Flex flex={1}>
-                    <Image
-                        alt={'Login Image'}
-                        objectFit={'cover'}
-                        src={
-                            'https://www.howtogeek.com/wp-content/uploads/2021/01/instagram-profile-on-a-smartphone.jpg?width=1198&trim=1,1&bg-color=000&pad=1,1'
-                        }
-                    />
+                    <Saporra />
                 </Flex>
             </Stack>
-
-
         </>
     )
 }

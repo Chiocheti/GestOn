@@ -14,13 +14,11 @@ import {
   useColorMode,
   useColorModeValue,
   useDisclosure,
-  IconButton,
   ButtonGroup,
   MenuDivider,
   Flex,
   Heading,
-  Stack,
-  keyframes
+  Stack
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import UseAuth from '../hooks/useAuth'
@@ -102,7 +100,7 @@ export default function navbarLogOnConsumidor() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>Cotação</MenuItem>
+                  <MenuItem onClick={()=>{Router.push("/cotacao")}}> Cotação</MenuItem>
                   <MenuItem onClick={()=>{Router.push("/authConsumidor")}}>Abrir meu Perfil</MenuItem>
                   <MenuItem onClick={()=>{Router.push("/enderecosDoConsumidor")}}>Endereços</MenuItem>
                   <MenuItem>Favoritos</MenuItem>

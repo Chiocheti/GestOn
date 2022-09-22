@@ -1,34 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">I-Tiplace</h1>
 
-## Getting Started
+<img src="./src/Assets/gif.gif" alt="Descrição da imagem">
 
-First, run the development server:
+> 🔎 Um marketplace focado em produtos agropecuários com o intuito de facilitar, agilizar e melhorar as buscas e compras de produtos agricolas.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## :page_facing_up: Informações
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O projeto foi realizado utilizando o framework [NextJS](https://nextjs.org/), [ChakraUI](https://chakra-ui.com/) e banco de dados [MariaDB](https://mariadb.org/) 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+💠 **Instruções**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+Após baixar os arquivos acima, você vai configurar os banco [MariaDB](https://mariadb.org/) e a [FireBase](https://firebase.google.com/?hl=pt-br) no local citado abaixo.
 
-To learn more about Next.js, take a look at the following resources:
+Depois você vai abrir o arquivo <em>config.json</em> com 2 clicks, feito isso vai abrir e nele você vai dar início a configuração do banco de dados.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Feito isso basta iniciar o site seguindo os passos da categoria de <em>❔ **Como iniciar o Site**</em>.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+❔ **Como iniciar o Site**
 
-## Deploy on Vercel
+ Para iniciar o site você vai precisar ter/instalar os componentes, basta seguir os seguintes comandos:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> npm install <br/><br/>
+> node server.js <br/><br/>
+> npm run dev <br/><br/>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ Após isso basta acessar o a url <em>localhost:3001</em><br/><br/>
+
+## 🤝 Colaboradores
+
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
+
+<table>
+  <tr>
+    <td align="center"> 
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/106785272?v=4" width="160px;" alt="Foto do Samule"/><br>
+        <sub>
+          <b>Samuel Santos</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center"> 
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/73672727?v=4" width="160px;" alt="Foto do Marcelo"/><br>
+        <sub>
+          <b>marcelogod</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center"> 
+      <a href="#">
+        <img src="https://avatars.githubusercontent.com/u/73504715?v=4" width="160px;" alt="Foto do Gabreil"/><br>
+        <sub>
+          <b>Gabriel Chiocheti</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>

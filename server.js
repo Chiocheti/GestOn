@@ -23,6 +23,7 @@ require("./app/routes/carrinho.routes.js")(app);
 require("./app/routes/produtoNoCarrinho.routes.js")(app);
 require("./app/routes/favoritos.routes.js")(app);
 require("./app/routes/itemFavoritado.routes.js")(app);
+require("./app/routes/deleteall.routes.js")(app);
 // set port, listen for requests
 const PORT = 3000;
 app.listen(PORT, () => {

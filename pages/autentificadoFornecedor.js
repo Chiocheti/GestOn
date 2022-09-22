@@ -14,73 +14,12 @@ import {
 import NavbarLogOn from '../components/navbarLogOnFornecedor';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 import UseAuth from '../hooks/useAuth'
-import Router from "next/router";
-import Axios from 'axios';
-import React, { useState } from 'react';
-
 
 
 export default function autentificadoFornecedor() {
 
     const { user, signin, signout } = UseAuth();
-
-    var [idFornecedor, setIdFornecedor] = useState("Id preset")
-    var [nomeFantasia, setNomeFantasia] = useState("Nome preset")
-    var [cnpj, setCnpj] = useState("Cnpj preset")
-    var [telefone, setTelefone] = useState("Telefone preset")
-    var [hora_abre, setHora_abre] = useState("Hora Abre preset")
-    var [hora_fecha, setHora_fecha] = useState("Hora Fecha preset")
-
-    var usuario = null;
-
-    console.log("Pagina de autentificação do Fornecedor: ");
     console.log(user);
-
-    async function loadUser() {
-        const options = {
-            method: 'GET',
-            url: `http://localhost:3000/api/usuario/cadastro/${user.email}/fornecedor`
-        };
-        await Axios.request(options).then(function (response) {
-            console.log(response.data);
-            usuario = response.data;
-            console.log("Usuario: ");
-            console.log(usuario);
-        }).catch(function (error) {
-            console.log("Erro do sistema: " + error);
-        });
-
-        await loadFornecedor(usuario.id);
-    }
-
-    async function loadFornecedor(id) {
-        const options = {
-            method: 'GET',
-            url: `http://localhost:3000/api/fornecedor/${id}`
-        };
-        await Axios.request(options).then(function (response) {
-            console.log(response.data);
-            setIdFornecedor(response.data.idFornecedor);
-            setNomeFantasia(response.data.nomeFantasia);
-            setCnpj(response.data.cnpj);
-            setTelefone(response.data.telefone);
-            setHora_abre(response.data.hora_abre);
-            setHora_fecha(response.data.hora_fecha);
-
-            console.log("Fornecedor: ")
-            console.log("Id: " + idFornecedor);
-            console.log("Nome: " + nomeFantasia);
-            console.log("CNPJ: " + cnpj);
-            console.log("Telefone: " + telefone);
-            console.log("Hora Abre: " + hora_abre);
-            console.log("Hora Fecha: " + hora_abre);
-        }).catch(function (error) {
-            console.log("Erro do sistema: " + error);
-        });
-    }
-
-    loadUser();
-
     return (
         <>
             <NavbarLogOn />
@@ -111,7 +50,7 @@ export default function autentificadoFornecedor() {
                                 objectFit="cover"
                                 boxSize="100%"
                                 src={
-                                    user.photoURL
+                                    'https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-PNG.png'
                                 }
                             />
                         </Flex>
@@ -123,35 +62,44 @@ export default function autentificadoFornecedor() {
                             p={1}
                             pt={2}>
                             <Heading fontSize={'2xl'} fontFamily={'body'}>
-                                {nomeFantasia}
+                                Nome da pessoa
                             </Heading>
                             <Text fontWeight={600} color={'gray.500'} size="sm" mb={4}>
-                                Email: {user.email}
+                                @email da pessoa
                             </Text>
-                            <Text href={'#'} color={'blue.400'}>
-                                Dados Cadastrados
+                            <Text
+                                textAlign={'center'}
+                                color={useColorModeValue('gray.700', 'gray.400')}
+                                px={3}>
+                                Endereço, Rua, bairro,cidade e Estado. CEP
+                                <Text href={'#'} color={'blue.400'}>
+                                    Dados Cadastrados
+                                </Text>
                             </Text>
+                            <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
                                 <Badge
                                     px={2}
                                     py={1}
                                     bg={useColorModeValue('gray.50', 'gray.800')}
                                     fontWeight={'400'}>
-                                    Cnpj: {cnpj}
+                                    #CPF
                                 </Badge>
                                 <Badge
                                     px={2}
                                     py={1}
                                     bg={useColorModeValue('gray.50', 'gray.800')}
                                     fontWeight={'400'}>
-                                    Telefone: {telefone}
+                                    #Telefone
                                 </Badge>
                                 <Badge
                                     px={2}
                                     py={1}
                                     bg={useColorModeValue('gray.50', 'gray.800')}
                                     fontWeight={'400'}>
-                                    Tipo de Conta: Fornecedor
+                                    #Cons ou Forn
                                 </Badge>
+                            </Stack>
+
                             <Stack
                                 width={'100%'}
                                 mt={'2rem'}

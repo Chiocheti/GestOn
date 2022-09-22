@@ -19,8 +19,7 @@ import {
     MenuDivider,
     Flex,
     Heading,
-    Stack,
-    keyframes
+    Stack
   } from '@chakra-ui/react'
   import { MoonIcon, SunIcon } from '@chakra-ui/icons';
   import UseAuth from '../hooks/useAuth'
@@ -53,6 +52,12 @@ import {
     function goHome() {
       Router.push('/');
     }
+    function goEditProduct() {
+      Router.push('/ttt');
+    }
+    function goCreateProduct() {
+      Router.push('/createProduct');
+    }
   
     return (
       <>
@@ -72,8 +77,7 @@ import {
                   </Button>
                 </Stack>
               </Flex>
-              <Button colorScheme='orange.400' onClick={() => goHome()} bg={'orange.400'}
-              _hover={{ bg: 'orange.500' }}> Home</Button>
+              <Button colorScheme='green' onClick={() => goHome()}> Home</Button>
             </ButtonGroup>
             <Wrap>
               <WrapItem>
@@ -103,7 +107,9 @@ import {
                     <br />
                     <MenuDivider />
                     <MenuItem>Carrinho</MenuItem>
-                    <MenuItem onClick={() => { Router.push("./authFornecedor") }} >Abrir meu Perfil</MenuItem>
+                    <MenuItem>Abrir meu Perfil</MenuItem>
+                    <MenuItem onClick={() => { goEditProduct() }} >Editar Produto</MenuItem>
+                    <MenuItem onClick={() => { goCreateProduct() }} >Criar Produto</MenuItem>
                     <MenuItem onClick={() => { goHome() }} > Deslogar </MenuItem>
                   </MenuList>
                 </Menu>

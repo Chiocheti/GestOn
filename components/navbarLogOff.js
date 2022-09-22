@@ -59,7 +59,7 @@ export default function navbarLogOff() {
     await signin();
     Router.push('/authConsumidor');
   }
-  async function cadastro() {
+  async function cadastrar() {
     await signin();
     Router.push('/cadastro');
   }
@@ -82,8 +82,7 @@ export default function navbarLogOff() {
                 </Button>
               </Stack>
             </Flex>
-            <Button colorScheme='orange.400' onClick={() => goHome()} bg={'orange.400'}
-              _hover={{ bg: 'orange.500' }}> Home</Button>
+            <Button colorScheme='green' onClick={() => goHome()}> Home</Button>
           </ButtonGroup>
           <Menu>
             <MenuButton as={Button} mr='30'>
@@ -91,13 +90,13 @@ export default function navbarLogOff() {
             </MenuButton>
             <MenuList>
               <Stack>
-                <Button onClick={() => { cadastro() }}
+                <Button onClick={() => { cadastrar() }}
                   w={'full'}
 
                   variant={'outline'}
                   leftIcon={<FcGoogle />}>
                   <Center>
-                    <Text>Sign up with Google</Text>
+                    <Text>Sign in with Google</Text>
                   </Center>
                 </Button>
                 <Button onClick={() => { authFornecedor() }}
