@@ -72,7 +72,8 @@ export default function navbarLogOff() {
                 </Button>
               </Stack>
             </Flex>
-            <Button colorScheme='green' onClick={() => goHome()}> Home</Button>
+            <Button colorScheme='orange.400' onClick={() => goHome()} bg={'orange.400'}
+              _hover={{ bg: 'orange.500' }}> Home</Button>
           </ButtonGroup>
           <Wrap>
             <WrapItem>
