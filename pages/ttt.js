@@ -16,7 +16,7 @@ function goEditProduct() {
 }
 
 export default function App() {
-    const [lista, setLista] = useState('lista');
+    const [lista, setLista] = useState('Lista');
 
 
     function isLista() {
@@ -52,22 +52,15 @@ export default function App() {
             </Heading></Center>
             <Center><br /><br /><br /><br /><br /><br /><Text color={'gray.500'}>
                 Escolha o produto que deseja editar
-            </Text></Center><Button bg={'blue.400'}
+            </Text></Center>
+            <div id='Grid' style={{ margin: '100px', paddingRight: '5px' }} ><Button bg={'blue.400'}
                 color={'white'}
-                w="full"
+
                 _hover={{
                     bg: 'blue.500',
                 }} size='xs' onClick={isLista}>
-                CUUUUU:
-            </Button><Button bg={'blue.400'}
-                color={'white'}
-                w="full"
-                _hover={{
-                    bg: 'blue.500',
-                }} size='xs' onClick={isGrid}>
-                CU2:
-            </Button>
-            <div id='Grid' style={{ margin: '100px', paddingRight: '5px' }} >
+                LISTADO:
+            </Button><br/><br/>
                 <SimpleGrid columns={4} spacing={2}>
                     <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
                     <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
@@ -81,6 +74,14 @@ export default function App() {
                 </SimpleGrid>
             </div>
             <div id='Lista' style={{ margin: '100px', paddingRight: '5px' }} >
+                <Button bg={'blue.400'}
+                    color={'white'}
+
+                    _hover={{
+                        bg: 'blue.500',
+                    }} size='xs' onClick={isGrid}>
+                    LADO A LADO:
+                </Button><br/><br/>
                 <SimpleGrid columns={1} spacingX='20px' spacingY='20px'>
                     <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
                     <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
