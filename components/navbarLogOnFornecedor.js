@@ -58,6 +58,9 @@ import {
     function goCreateProduct() {
       Router.push('/createProduct');
     }
+    function goMyPerfil() {
+      Router.push('/authFornecedor');
+    }
   
     return (
       <>
@@ -108,7 +111,7 @@ import {
                     <br />
                     <MenuDivider />
                     <MenuItem>Carrinho</MenuItem>
-                    <MenuItem>Abrir meu Perfil</MenuItem>
+                    <MenuItem onClick={() => { goMyPerfil() }} >Abrir meu Perfil</MenuItem>
                     <MenuItem onClick={() => { goEditProduct() }} >Editar Produto</MenuItem>
                     <MenuItem onClick={() => { goCreateProduct() }} >Criar Produto</MenuItem>
                     <MenuItem onClick={() => { goHome() }} > Deslogar </MenuItem>

@@ -152,7 +152,7 @@ export default function editProdrutro() {
 
                             <Editable
                                 textAlign='center'
-                                defaultValue='Prantador de milhooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo'
+                                defaultValue='Prantador de milho'
                                 fontSize='1xl'
                                 isPreviewFocusable={false}>
                                 <EditablePreview />

@@ -22,6 +22,7 @@ import UseAuth from '../hooks/useAuth'
 import Axios from 'axios';
 
 export default function Footer() {
+
   return (
     <>
       <Box
@@ -35,13 +36,15 @@ export default function Footer() {
           spacing={4}
           justify={{ base: 'center', md: 'space-between' }}
           align={{ base: 'center', md: 'center' }}>
+          <Text>{"Github dos Colaboradores ->"}</Text>
           <Stack direction={'row'} spacing={6}>
-            <Link href={'/'}>Home</Link>
-            <Link href={'#'}>About</Link>
-            <Link href={'#'}>Blog</Link>
-            <Link href={'#'}>Contact</Link>
+            <Link href={'https://github.com/Chiocheti'}>Chiocheti</Link>
+            <Link href={'https://github.com/MarceloGod'}>Marcelo</Link>
+            <Link href={'https://github.com/SAMSantos42'}>Samuel</Link>
+            <Link href={'https://github.com/CaioPagani'}>Caio</Link>
           </Stack>
-          <Text>© 2022 GestON by Chakra . All rights reserved </Text>
+          <Link href={'https://github.com/Chiocheti/GestOn'}>Link deste projeto</Link>
+          <Text>© 2022 GestOn by Chakra . All rights reserved for Dupla de Tres </Text>
         </Container>
       </Box>
     </>

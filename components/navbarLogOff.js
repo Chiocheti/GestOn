@@ -59,10 +59,17 @@ export default function navbarLogOff() {
     await signin();
     Router.push('/authConsumidor');
   }
+
+  async function LoginADM() {
+    await signin();
+    Router.push('/Login_CadastroAdm');
+  }
+
   async function cadastro() {
     await signin();
     Router.push('/cadastro');
   }
+
   return (
     <>
       <Box
@@ -110,7 +117,15 @@ export default function navbarLogOff() {
                   w={'full'}
                   variant={'outline'}
                   leftIcon={<BsFillCartCheckFill />}>
-                  Login como Consumidor </Button>
+                  Login como Consumidor
+                </Button>
+                
+                <Button onClick={() => { LoginADM() }}
+                  w={'full'}
+                  variant={'outline'}
+                  leftIcon={<BsFillCartCheckFill />}>
+                  Area de Administração
+                </Button>
               </Stack>
             </MenuList>
           </Menu>
