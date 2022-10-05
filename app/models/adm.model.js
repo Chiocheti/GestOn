@@ -14,29 +14,12 @@ Adm.create = (newAdm, result) => {
             result(err, null);
             return;
         }
-        console.log("created adm: ", { idAdm: res.insertId , ...newAdm });
+        console.log("created adm: ", { ...newAdm });
         result(null, { ...newAdm });
     });
 };
 
-Adm.findById = (idAdm, result) => {
-    sql.query(`SELECT * FROM adm WHERE idAdm = '${idAdm}'`, (err, res) => {
-        if (err) {
-            console.log("error: ", err);
-            result(err, null);
-            return;
-        }
-        if (res.length) {
-            console.log("found adm: ", res[0]);
-            result(null, res[0]);
-            return;
-        }
-        // not found adm with the idAdm
-        result({ kind: "not_found" }, null);
-    });
-};
-
-Adm.findByIdFuncionario = (idFuncionario, result) => {
+Adm.findById = (idFuncionario, result) => {
     sql.query(`SELECT * FROM adm WHERE idFuncionario = '${idFuncionario}'`, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -48,7 +31,7 @@ Adm.findByIdFuncionario = (idFuncionario, result) => {
             result(null, res[0]);
             return;
         }
-        // not found adm with the idAdm
+        // not found adm with the idFuncionario
         result({ kind: "not_found" }, null);
     });
 };
@@ -66,10 +49,10 @@ Adm.getAll = (result) => {
     });
 };
 
-Adm.updateById = (idAdm, adm, result) => {
+Adm.updateById = (idFuncionario, adm, result) => {
     sql.query(
-        "UPDATE adm SET nome = ? , idFuncionario = ? , telefone = ? , senha = ? WHERE idAdm = ?",
-        [adm.nome, adm.idFuncionario, adm.telefone, adm.senha, idAdm],
+        "UPDATE adm SET nome = ? , telefone = ? , senha = ? WHERE idFuncionario = ?",
+        [adm.nome, adm.telefone, adm.senha, idFuncionario],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -77,29 +60,29 @@ Adm.updateById = (idAdm, adm, result) => {
                 return;
             }
             if (res.affectedRows == 0) {
-                // not found Adm with the idAdm
+                // not found Adm with the idFuncionario
                 result({ kind: "not_found" }, null);
                 return;
             }
-            console.log("updated Adm: ", { ...adm.nome,...adm.idFuncionario , ...adm.telefone, ...adm.senha });
-            result(null, { ...adm.nome,...adm.idFuncionario ,...adm.telefone, ...adm.senha });
+            console.log("updated Adm: ", { ...adm.nome, ...adm.telefone, ...adm.senha });
+            result(null, { ...adm.nome , ...adm.telefone, ...adm.senha });
         }
     );
 };
 
-Adm.remove = (idAdm, result) => {
-    sql.query("DELETE FROM adm WHERE idAdm = ?", idAdm, (err, res) => {
+Adm.remove = (idFuncionario, result) => {
+    sql.query("DELETE FROM adm WHERE idFuncionario = ?", idFuncionario, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
             return;
         }
         if (res.affectedRows == 0) {
-            // not found Adm with the id
+            // not found Adm with the idFuncionario
             result({ kind: "not_found" }, null);
             return;
         }
-        console.log("deleted adm with idAdm: ", idAdm);
+        console.log("deleted adm with idFuncionario: ", idFuncionario);
         result(null, res);
     });
 };

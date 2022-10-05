@@ -38,38 +38,22 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOneById = (req, res) => {
-  Adm.findById(req.params.idAdm, (err, data) => {
+  Adm.findById(req.params.idFuncionario, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found adm with idAdm ${req.params.idAdm}.`
+          message: `Not found adm with idFuncionario ${req.params.idFuncionario}.`
         });
       } else {
         res.status(500).send({
-          message: "Error retrieving adm with idAdm " + req.params.idAdm
+          message: "Error retrieving adm with idFuncionario " + req.params.idFuncionario
         });
       }
     } else res.send(data);
   });
 };
 
-exports.findOneByIdFuncioario = (req, res) => {
-  Adm.findByIdFuncionario(req.params.idAdm, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found adm with idAdm ${req.params.idAdm}.`
-        });
-      } else {
-        res.status(500).send({
-          message: "Error retrieving adm with idAdm " + req.params.idAdm
-        });
-      }
-    } else res.send(data);
-  });
-};
-
-// Update a Adm identified by the idAdm in the request
+// Update a Adm identified by the idFuncionario in the request
 exports.update = (req, res) => {
   // Validate Request
   if (!req.body) {
@@ -79,17 +63,17 @@ exports.update = (req, res) => {
   }
   console.log(req.body);
   Adm.updateById(
-    req.params.idAdm,
+    req.params.idFuncionario,
     new Adm(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found Adm with idAdm ${req.params.idAdm}.`
+            message: `Not found Adm with idFuncionario ${req.params.idFuncionario}.`
           });
         } else {
           res.status(500).send({
-            message: "Error updating adm with idAdm " + req.params.idAdm
+            message: "Error updating adm with idFuncionario " + req.params.idFuncionario
           });
         }
       } else res.send(data);
@@ -97,17 +81,17 @@ exports.update = (req, res) => {
   );
 };
 
-// Delete a Adm with the specified idAdm in the request
+// Delete a Adm with the specified idFuncionario in the request
 exports.delete = (req, res) => {
-  Adm.remove(req.params.idAdm, (err, data) => {
+  Adm.remove(req.params.idFuncionario, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Adm with idAdm ${req.params.idAdm}.`
+          message: `Not found Adm with idFuncionario ${req.params.idFuncionario}.`
         });
       } else {
         res.status(500).send({
-          message: "Could not delete Adm with idAdm " + req.params.idAdm
+          message: "Could not delete Adm with idFuncionario " + req.params.idFuncionario
         });
       }
     } else res.send({ message: `Adm was deleted successfully!` });

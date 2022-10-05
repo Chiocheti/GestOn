@@ -60,7 +60,7 @@ export default function SplitScreen() {
         if (senha != confirmeSenha) {
             toast({
                 title: 'Senha Incorreta',
-                description: "Senhas não Confere",
+                description: "Senhas não Conferem",
                 status: 'warning',
                 duration: 3000,
                 isClosable: true,
@@ -85,10 +85,10 @@ export default function SplitScreen() {
                         isClosable: true,
                     })
                 } else {
-                    if (idFuncionario.length < 1) {
+                    if (idFuncionario.length < 1 || isNaN(idFuncionario)) {
                         toast({
                             title: 'ID Invalido',
-                            description: "O Campo não esta preenchido",
+                            description: "Digite um identificador valido",
                             status: 'warning',
                             duration: 3000,
                             isClosable: true,
@@ -108,7 +108,7 @@ export default function SplitScreen() {
                             toast({
                                 title: 'Conta Criada com sucesso',
                                 description: "faça agora seu login",
-                                status: 'warning',
+                                status: 'success',
                                 duration: 3000,
                                 isClosable: true,
                             })

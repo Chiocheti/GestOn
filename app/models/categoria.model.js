@@ -1,7 +1,7 @@
 const sql = require("./db.js");
 // constructor
 const Categoria = function (categoria) {
-    this.idAdm = categoria.idAdm;
+    this.idFuncionario = categoria.idFuncionario;
     this.nome = categoria.nome;
 };
 

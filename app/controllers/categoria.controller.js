@@ -9,7 +9,7 @@ exports.create = (req, res) => {
   }
   // Create a Categoria
   const categoria = new Categoria({
-    idAdm: req.body.idAdm,
+    idFuncionario: req.body.idFuncionario,
     nome: req.body.nome,
   });
   // Save Categoria in the database
