@@ -61,7 +61,6 @@ export default function navbarLogOff() {
   }
 
   async function LoginADM() {
-    await signin();
     Router.push('/Login_CadastroAdm');
   }
 
