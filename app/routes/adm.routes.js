@@ -11,6 +11,9 @@ module.exports = app => {
   // Retrieve a single adm with idFuncionario
   router.get("/:idFuncionario", adm.findOneById); // OK
 
+  // Retrieve a single adm with idFuncionario
+  router.get("/valida/:idFuncionario/:senha", adm.findOneByIdAndSenha); // OK
+
   // Update a adm with idFuncionario
   router.put("/:idFuncionario", adm.update); // OK
 

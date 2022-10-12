@@ -36,6 +36,23 @@ Adm.findById = (idFuncionario, result) => {
     });
 };
 
+Adm.findByIdAndSenha = (idFuncionario, senha, result) => {
+    sql.query(`SELECT * FROM adm WHERE idFuncionario = '${idFuncionario}' and senha = '${senha}' `, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log("found adm: ", res[0]);
+            result(null, res[0]);
+            return;
+        }
+        // not found adm with the idFuncionario
+        result({ kind: "not_found" }, null);
+    });
+};
+
 Adm.getAll = (result) => {
     let query = "SELECT * FROM adm";
     sql.query(query, (err, res) => {

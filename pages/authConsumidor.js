@@ -139,15 +139,6 @@ export default function autentificado(text) {
             console.log("Erro do sistema: " + error);
         });
 
-        /*
-        var lista = document.getElementById('lista')
-        var elemento = document.createElement('span')
-        var parentLista = lista.parentNode
-
-        parentLista.insertBefore(lista , elemento)
-        lista.insertBefore
-        */
-
     }
 
     function mudaNome() {

@@ -84,7 +84,6 @@ export default function item({ endereco }) {
             <Button leftIcon={<FcHighPriority />} colorScheme='teal' variant='solid' onClick={() => deleteEndereco()}>
                 Delete
             </Button>
-
         </>
     )
 }

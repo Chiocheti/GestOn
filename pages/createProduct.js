@@ -18,19 +18,22 @@ import {
 
 import UseAuth from '../hooks/useAuth'
 import NavbarLogOn from '../components/navbarLogOnFornecedor';
-import Carrozel from '../components/carrozel';
-import Butao from '../components/butaoDeSalva';
-import Saporra from '../components/cardProduto';
+import Cartao from '../components/cardProduto';
 import { useToast } from '@chakra-ui/react'
-import React from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
 import Router from "next/router";
-import { EditIcon, CheckIcon, CloseIcon, FcApprove } from '@chakra-ui/icons';
 
 export default function editProdrutro() {
 
     const { user, signin, signout } = UseAuth();
     console.log(user);
+
+    const [nomeProduto, setNomeProduto] = useState(() => " ");
+    const [descricaoProduto, setDescricaoProduto] = useState(() => " ");
+    const [descricaoLongaProduto, setDescricaoLongaProduto] = useState(() => " ");
+    const [marcaProduto, setMarcaProduto] = useState(() => " ");
+    const [imageProduto, setImageProduto] = useState(() => "https://media.tenor.com/UnFx-k_lSckAAAAM/amalie-steiness.gif");
 
     const toast = useToast()
 
@@ -52,47 +55,91 @@ export default function editProdrutro() {
         Router.push('/cadastro');
     });
 
-    function EditableControls() {
-        const {
-            isEditing,
-            getSubmitButtonProps,
-            getCancelButtonProps,
-            getEditButtonProps,
-        } = useEditableControls()
-
-        return isEditing ? (
-            <ButtonGroup justifyContent='center' size='sm'>
-                <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
-                <IconButton icon={<CloseIcon />} {...getCancelButtonProps()} />
-            </ButtonGroup>
-        ) : (
-            <Flex justifyContent='center'>
-                <IconButton size='sm' icon={<EditIcon />} {...getEditButtonProps()} />
-            </Flex>
-        )
+    const prodruto = {
+        nome: nomeProduto,
+        descricaoLonga: descricaoLongaProduto,
+        descricaoCurta: descricaoProduto,
+        linkImg: imageProduto,
+        marca: marcaProduto
     }
-    const size = '96px';
-    const color = 'teal';
 
-    const pulseRing = keyframes`
-        0% {transform: scale(0.33);}
-        40%,50% {opacity: 0;}
-        100% {opacity: 0;}
-    `;
+    function save() {
 
-    const [show, setShow] = React.useState(false)
+        var nome = document.getElementById("nome").value;
+        var descricao = document.getElementById("descricao").value;
+        var descricaolonga = document.getElementById("descricaolonga").value;
+        var marca = document.getElementById("marca").value;
+        var imagem = document.getElementById("imagem").value;
 
-    const handleToggle = () => setShow(!show)
-
-    const property = {
-        nome: "Saca de grãos de milho",
-        descricaoLonga: "Saca de 20k de grão de milho americanos",
-        descricaoCurta: "Saca de 20k de milho",
-        linkImg: "https://agristore.com/image/cache/catalog/Di%20Solo/milho-ipanema-20kg-1200x1200.png",
-        marca: "Milho Ipanema",
-        preco: "R$99,99"
-
+        if (nome == null || nome == "") {
+            toast({
+                title: 'Ocorreu um erro no formulário!',
+                description: `Por favor, insira um nome!`,
+                status: 'warning',
+                duration: 3000,
+                isClosable: true,
+            })
+        } else if (descricao == null || descricao == "") {
+            toast({
+                title: 'Ocorreu um erro no formulário!',
+                description: `Por favor, insira uma descrição!`,
+                status: 'warning',
+                duration: 3000,
+                isClosable: true,
+            })
+        } else if (descricaolonga == null || descricaolonga == "") {
+            toast({
+                title: 'Ocorreu um erro no formulário!',
+                description: `Por favor, insira uma descrição longa!`,
+                status: 'warning',
+                duration: 3000,
+                isClosable: true,
+            })
+        } else if (marca == null || marca == "") {
+            toast({
+                title: 'Ocorreu um erro no formulário!',
+                description: `Por favor, insira uma marca!`,
+                status: 'warning',
+                duration: 3000,
+                isClosable: true,
+            })
+        } else if (imagem == null || imagem == "") {
+            toast({
+                title: 'Ocorreu um erro no formulário!',
+                description: `Por favor, insira uma imagem!`,
+                status: 'warning',
+                duration: 3000,
+                isClosable: true,
+            })
+        } else {
+            setNomeProduto(nome)
+            setDescricaoLongaProduto(descricaolonga)
+            setDescricaoProduto(descricao)
+            setImageProduto(imagem)
+            setMarcaProduto(marca)
+            // Cadastra o produto 
+            var options = {
+                method: 'POST',
+                url: 'http://localhost:3000/api/produto',
+                headers: { 'Content-Type': 'application/json' },
+                data: { nome: nome, descricaoCurta: descricao, descricaoLonga: descricaolonga, linkImg: imagem, marca: marca }
+            };
+            console.log(options);
+            Axios.request(options).then(function (response) {
+                console.log(response.data);
+                toast({
+                    title: 'Produto cadastrado com sucesso!',
+                    description: "Edite as tags dele para que ele apareça na lista de produtos!",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                })
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
     }
+
     return (
         <>
             <NavbarLogOn />
@@ -105,92 +152,34 @@ export default function editProdrutro() {
                     boxShadow={'lg'}
                 >
                     <Stack spacing={4} w={'full'} maxW={'md'}>
-                        <Stack direction={['column', 'row']} spacing={6}>
-                            <Center>
-                                <Flex>
-                                    <Avatar size="xl" src={property.linkImg} />
-                                </Flex>
-                            </Center>
-                            <Center w="full">
-                                <Tag borderRadius='full' colorScheme='teal' fontSize='10px'>
-                                    AGRICOLA
-                                </Tag>
-                                <Tag borderRadius='full' colorScheme='teal' fontSize='10px'>
-                                    MILHO
-                                </Tag>
-                                <Tag borderRadius='full' colorScheme='teal' fontSize='10px'>
-                                    PLANTIO
-                                </Tag>
-                            </Center>
-                        </Stack>
                         <Heading fontSize={'2xl'}>Nome do Produto</Heading>
+                        <Input placeholder="nome do produto" id="nome" />
                         <Stack spacing={6}>
-                            <Editable
-                                spacing={6}
-                                textAlign='center'
-                                defaultValue='Milho Ipanema'
-                                fontSize='1xl'
-                                isPreviewFocusable={false}>
-                                <EditablePreview />
-                                <Input as={EditableInput} />
-                                <EditableControls />
-                            </Editable>
 
                             <Heading fontSize={'2xl'}>Descrição</Heading>
-
-                            <Editable
-                                textAlign='center'
-                                defaultValue='Prantador de milho'
-                                fontSize='1xl'
-                                isPreviewFocusable={false}>
-                                <EditablePreview />
-                                <Input as={EditableInput} />
-                                <EditableControls />
-                            </Editable>
+                            <Input placeholder="Descrição" id="descricao" />
 
                             <Heading fontSize={'2xl'}>Descrição Longa</Heading>
-
-                            <Editable
-                                textAlign='center'
-                                defaultValue='Prantador de milho'
-                                fontSize='1xl'
-                                isPreviewFocusable={false}>
-                                <EditablePreview />
-                                <Input as={EditableInput} />
-                                <EditableControls />
-                            </Editable>
+                            <Input placeholder="Descrição longa" id="descricaolonga" />
 
                             <Heading fontSize={'2xl'}>Marca</Heading>
+                            <Input placeholder="Marca" id="marca" />
 
-                            <Editable
-                                textAlign='center'
-                                defaultValue='SóMilho'
-                                fontSize='1xl'
-                                isPreviewFocusable={false}>
-                                <EditablePreview />
-                                <Input as={EditableInput} />
-                                <EditableControls />
-                            </Editable>
                             <Heading fontSize={'2xl'}>Imagem:</Heading>
-                            <Editable
-                                textAlign='center'
-                                defaultValue='https://imgur.com/ÓUMIO'
-                                fontSize='1xl'
-                                isPreviewFocusable={false}>
-                                <EditablePreview />
-                                <Input as={EditableInput} />
-                                <EditableControls />
-                            </Editable>
+                            <Input placeholder="https://imgur.com/ÓUMIO" id="imagem" />
 
-                            <Butao />
+                            <Button
+                                colorScheme='teal'
+                                variant='solid' onClick=
+                                {() => { save() }}>Save
+                            </Button>
                         </Stack>
                     </Stack>
                 </Flex>
                 <Flex flex={1}>
-                    <Saporra />
+                    <Cartao property={prodruto} />
                 </Flex>
             </Stack>
-                <Carrozel nome="tanto faz"/>
         </>
     )
 }

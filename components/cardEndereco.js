@@ -15,4 +15,4 @@ export default function card({ enderecos }) {
             </Box>
         </>
     )
-}
+} 

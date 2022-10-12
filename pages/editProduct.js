@@ -5,29 +5,18 @@ import {
     Avatar,
     FormControl,
     Stack,
-    IconButton,
-    ButtonGroup,
-    Heading,
-    Editable,
-    EditableInput,
-    EditablePreview,
-    useEditableControls,
-    keyframes,
     Center,
     FormLabel,
     Switch,
-    Checkbox,
-    CheckboxGroup,
 } from '@chakra-ui/react';
 
 import UseAuth from '../hooks/useAuth'
 import NavbarLogOn from '../components/navbarLogOnFornecedor';
-import Saporra from '../components/cardProduto';
+import Cartao from '../components/createMyProduct';
 import { useToast } from '@chakra-ui/react'
 import React from 'react';
 import Axios from 'axios';
 import Router from "next/router";
-import { EditIcon, CheckIcon, CloseIcon, FcLike, FcCurrencyExchange, FcInfo } from '@chakra-ui/icons';
 
 export default function editProdrutro() {
 
@@ -54,38 +43,6 @@ export default function editProdrutro() {
         Router.push('/cadastro');
     });
 
-    function EditableControls() {
-        const {
-            isEditing,
-            getSubmitButtonProps,
-            getCancelButtonProps,
-            getEditButtonProps,
-        } = useEditableControls()
-
-        return isEditing ? (
-            <ButtonGroup justifyContent='center' size='sm'>
-                <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
-                <IconButton icon={<CloseIcon />} {...getCancelButtonProps()} />
-            </ButtonGroup>
-        ) : (
-            <Flex justifyContent='center'>
-                <IconButton size='sm' icon={<EditIcon />} {...getEditButtonProps()} />
-            </Flex>
-        )
-    }
-    const size = '96px';
-    const color = 'teal';
-
-    const pulseRing = keyframes`
-        0% {transform: scale(0.33);}
-        40%,50% {opacity: 0;}
-        100% {opacity: 0;}
-    `;
-
-    const [show, setShow] = React.useState(false)
-
-    const handleToggle = () => setShow(!show)
-
     const property = {
         nome: "Saca de grãos de milho",
         descricaoLonga: "Saca de 20k de grão de milho americanos",
@@ -93,7 +50,6 @@ export default function editProdrutro() {
         linkImg: "https://agristore.com/image/cache/catalog/Di%20Solo/milho-ipanema-20kg-1200x1200.png",
         marca: "Milho Ipanema",
         preco: "R$99,99"
-
     }
 
     return (
@@ -127,36 +83,38 @@ export default function editProdrutro() {
                             </Center>
                         </Stack>
                         <Stack spacing={6}>
-
-                            <Heading fontSize={'2xl'}>Valor</Heading>
-                            <Editable
-                                textAlign='center'
-                                defaultValue='100,00 conto'
-                                fontSize='2xl'
-                                isPreviewFocusable={false}>
-                                <EditablePreview />
-                                <Input as={EditableInput} />
-                                <EditableControls />
-                            </Editable>
-                            <Heading fontSize={'2xl'}>Defina as categorias</Heading>
-                            <CheckboxGroup colorScheme='green' defaultValue={['agricola']}>
-                                <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                                    <Checkbox value='agricola'>Agricola</Checkbox>
-                                    <Checkbox value='milho'>Milho</Checkbox>
-                                    <Checkbox value='plantio'>Plantio</Checkbox>
-                                </Stack>
-                            </CheckboxGroup>
-                            <FormControl display='flex' alignItems='center'>
-                                <FormLabel htmlFor='Sumemo' mb='1'>
-                                    Produto em estoque?
-                                </FormLabel>
-                                <Switch id='Sumemo' />
-                            </FormControl>
+                            <br /><br />
+                            <Stack
+                                direction={['column', 'row']}
+                                spacing={6}
+                                align={'center'}
+                                justify={'center'}>
+                                <center
+                                    lineHeight={1.1}
+                                    fontSize={{ base: '2xl', sm: '3xl' }}
+                                >
+                                    <FormControl isRequired>
+                                        <FormLabel> VALOR:
+                                        </FormLabel>
+                                        <Input
+                                            id='valor'
+                                            type='number'
+                                            placeholder='500 conto'
+                                        />
+                                    </FormControl><br/>
+                                    <FormControl display='flex' alignItems='center'>
+                                        <FormLabel htmlFor='Sumemo' mb='1'>
+                                            Produto em estoque?
+                                        </FormLabel>
+                                        <Switch id='Sumemo' />
+                                    </FormControl>
+                                </center>
+                            </Stack>
                         </Stack>
                     </Stack>
                 </Flex>
                 <Flex flex={1}>
-                    <Saporra />
+                    <Cartao />
                 </Flex>
             </Stack>
         </>

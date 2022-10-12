@@ -1,8 +1,8 @@
 const sql = require("./db.js");
 // constructor
 const CategoriasDoProduto = function (categoriasDoProduto) {
-  this.idProduto = categoriasDoProduto.idFornecedor;
-  this.categoria = categoriasDoProduto.idProduto;
+  this.idProduto = categoriasDoProduto.idProduto;
+  this.idCategoria = categoriasDoProduto.idCategoria;
   };
 
   CategoriasDoProduto.create = (newCategoriasDoProduto, result) => {

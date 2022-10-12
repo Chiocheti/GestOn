@@ -16,11 +16,11 @@ import {
 } from '@chakra-ui/react'
 
 import UseAuth from '../hooks/useAuth'
-import { FcHighPriority , FcOk } from "react-icons/fc";
+import { FcHighPriority, FcOk } from "react-icons/fc";
 import Router from "next/router";
 import Axios from 'axios';
 import NavbarLogOnConsumidor from "../components/navbarLogOnConsumidor"
-import React , { useState } from 'react'
+import React, { useState } from 'react'
 
 export default function enderecoDoConsumidor() {
 
@@ -28,11 +28,11 @@ export default function enderecoDoConsumidor() {
 
     const { user, signin, signout } = UseAuth();
 
-    var[cep , setCEP] = useState('')
-    var[logradouro , setLogradouro] = useState('')
-    var[bairro , setBairro] = useState('')
-    var[cidade , setCidade] = useState('')
-    var[estado , setEstado] = useState('')
+    var [cep, setCEP] = useState('')
+    var [logradouro, setLogradouro] = useState('')
+    var [bairro, setBairro] = useState('')
+    var [cidade, setCidade] = useState('')
+    var [estado, setEstado] = useState('')
 
     var usuario;
 
@@ -50,14 +50,14 @@ export default function enderecoDoConsumidor() {
     });
 
 
-    function buscaCEP(){
+    function buscaCEP() {
         var cep = document.getElementById('cep').value
         setCEP(cep)
         const options = {
             method: 'GET',
             url: `https://viacep.com.br/ws/${cep}/json/`
         };
-        Axios.request(options).then(function(response){
+        Axios.request(options).then(function (response) {
             console.log(response.data)
             var endereco = response.data
             console.log("Endedeço: ")
@@ -68,12 +68,12 @@ export default function enderecoDoConsumidor() {
             setCidade(endereco.localidade)
             setEstado(endereco.uf)
 
-        }).catch(function (error){
+        }).catch(function (error) {
             console.log(error)
         })
     }
 
-    function saveEndereco(){
+    function saveEndereco() {
         var numero = document.getElementById('numero').value;
 
         console.log('idUsuario: ' + usuario.id)
@@ -88,7 +88,7 @@ export default function enderecoDoConsumidor() {
             method: 'POST',
             url: 'http://localhost:3000/api/endereco',
             headers: { 'Content-Type': 'application/json' },
-            data: { idUsuario: usuario.id , cep: cep , numero:numero , rua:logradouro , bairro:bairro , cidade:cidade , estado:estado}
+            data: { idUsuario: usuario.id, cep: cep, numero: numero, rua: logradouro, bairro: bairro, cidade: cidade, estado: estado }
         };
         Axios.request(options).then(function (response) {
             console.log(response.data);
@@ -112,7 +112,7 @@ export default function enderecoDoConsumidor() {
     }
     return (
         <>
-            <NavbarLogOnConsumidor/>
+            <NavbarLogOnConsumidor />
             <div
                 spacing={1}
                 w={'full'}
@@ -170,10 +170,10 @@ export default function enderecoDoConsumidor() {
                                                         variant='outline'
                                                         align={['center']}>
                                                         Validar CEP
-                                                        
+
                                                     </Button>
                                                     <Spacer />
-                                                    <Button 
+                                                    <Button
                                                         leftIcon={<FcHighPriority />}
                                                         colorScheme='red'
                                                         variant='outline'
@@ -211,7 +211,7 @@ export default function enderecoDoConsumidor() {
                                                 placeholder='Numero:'
                                                 id='numero' />
                                             <Button
-                                                onClick={() => {saveEndereco()}}
+                                                onClick={() => { saveEndereco() }}
                                                 colorScheme='teal'
                                                 variant='outline'
                                                 align={['center']}>

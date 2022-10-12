@@ -5,7 +5,6 @@ import {
     Spacer,
     Button,
     AvatarGroup,
-    Avatar,
     Center,
     Popover,
     PopoverTrigger,
@@ -14,23 +13,28 @@ import {
     PopoverCloseButton,
     PopoverHeader,
     PopoverBody,
-    PopoverFooter
+    PopoverFooter,
 } from '@chakra-ui/react'
 
-import { FcLike, FcCurrencyExchange , FcInfo} from "react-icons/fc";
+import { FcInfo } from "react-icons/fc";
 import React from 'react';
+import { EditIcon } from '@chakra-ui/icons'
+import Router from "next/router";
 
+function goCreateMyProduct() {
+    Router.push('/editProduct');
+}
 
-export default function cardProduto({property}) {
+export default function cardProduto({ produto }) {
 
     return (
-        <Box w='700px' borderWidth='1px' borderRadius='lg' overflow='hidden' margin='10px' padding='10px'>
+        <Box w='200px' borderWidth='1px' borderRadius='lg' overflow='hidden' margin='10px' padding='10px'>
             <Center>
                 <Image
                     margin='10px'
                     boxSize='90%'
                     objectFit='cover'
-                    src={property.linkImg}
+                    src={produto.linkImg}
                 />
             </Center>
             <Box
@@ -40,29 +44,24 @@ export default function cardProduto({property}) {
                 lineHeight='tight'
                 noOfLines={1}
             >
-                {property.nome}
-            </Box>
-            <Spacer></Spacer>
-            <Box>
-                {property.preco}
+                {produto.nome}
             </Box>
             <Flex marginTop='10px'>
                 <Popover>
                     <PopoverTrigger>
-                        <Button w='6rem' h='em' fontSize='23px' bg='teal.1000' leftIcon={<FcInfo fontSize='2.5rem' />} >Info</Button>
+                        <Button w='6rem' h='em' fontSize='16px' bg='teal.1000' leftIcon={<FcInfo fontSize='2.0rem' />} >Info</Button>
                     </PopoverTrigger>
                     <PopoverContent>
                         <PopoverArrow />
                         <PopoverCloseButton />
-                        <PopoverHeader>{property.descricaoCurta}</PopoverHeader>
-                        <PopoverBody>{property.descricaoLonga}</PopoverBody>
-                        <PopoverFooter>Marca: {property.marca}</PopoverFooter>
+                        <PopoverHeader>{produto.descricaoCurta}</PopoverHeader>
+                        <PopoverBody>{produto.descricaoLonga}</PopoverBody>
+                        <PopoverFooter>Marca: {produto.marca}</PopoverFooter>
                     </PopoverContent>
                 </Popover>
                 <Spacer />
                 <AvatarGroup spacing='.5rem'>
-                    <Avatar bg='teal.1000' icon={<FcLike fontSize='2.5rem' />} />
-                    <Avatar bg='teal.1000' icon={<FcCurrencyExchange fontSize='2.5rem' />} />
+                    <EditIcon w={7} h={7} color="lightgray" onClick={() => { goCreateMyProduct() }} />
                 </AvatarGroup>
             </Flex>
         </Box>

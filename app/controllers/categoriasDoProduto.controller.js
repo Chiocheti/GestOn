@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     // Create a CategoriasDoProduto
     const categoriasDoProduto = new CategoriasDoProduto({
         idProduto: req.body.idProduto,
-        categoria: req.body.categoria,
+        idCategoria: req.body.idCategoria,
     });
 
     // Save CategoriasDoProduto in the database
@@ -75,11 +75,11 @@ exports.findOneByIdCategoria = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found CategoriasDoProduto with idProduto ${req.params.idCategoria}.`
+                    message: `Not found CategoriasDoProduto with idCategoria ${req.params.idCategoria}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Error retrieving CategoriasDoProduto with idProduto " + req.params.idProduto
+                    message: "Error retrieving CategoriasDoProduto with idCategoria " + req.params.idCategoria
                 });
             }
         } else res.send(data);
@@ -96,21 +96,38 @@ exports.delete = (req, res) => {
                 });
             } else {
                 res.status(500).send({
-                    message: "Could not delete ProdutoDoFornecedor with idProdutoDoFornecedor " + req.params.idProdutoDoFornecedor
+                    message: "Could not delete CategoriasDoProduto with idCategoriasDoProduto" + req.params.idCategoriasDoProduto
                 });
             }
-        } else res.send({ message: `ProdutoDoFornecedor was deleted successfully!` });
+        } else res.send({ message: `CategoriasDoProduto was deleted successfully!` });
     });
 };
 
-// Delete all Fornecedores from the database.
+// Delete a CategoriasDoProduto with the specified CategoriasDoProduto in the request
+exports.delete = (req, res) => {
+    CategoriasDoProduto.removeFromIdCategoria(req.params.idCategoria, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found CategoriasDoProduto with idCategoria ${req.params.idCategoria}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Could not delete CategoriasDoProduto with idCategoria" + req.params.idCategoria
+                });
+            }
+        } else res.send({ message: `CategoriasDoProduto was deleted successfully!` });
+    });
+};
+
+// Delete all CategoriasDoProduto from the database.
 exports.deleteAll = (req, res) => {
-    ProdutoDoFornecedor.removeAll((err, data) => {
+    CategoriasDoProduto.removeAll((err, data) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while removing all produtoDoFornecedor."
+                    err.message || "Some error occurred while removing all CategoriasDoProduto."
             });
-        else res.send({ message: `All ProdutoDoFornecedor were deleted successfully!` });
+        else res.send({ message: `All CategoriasDoProduto were deleted successfully!` });
     });
 };

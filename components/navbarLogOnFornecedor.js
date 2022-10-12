@@ -40,26 +40,21 @@ import {
       </Link>
     );
     const { colorMode, toggleColorMode } = useColorMode();
-    const { isOpen, onOpen, onClose } = useDisclosure();
   
     const { user, signin, signout } = UseAuth();
-  
-    async function criarConta() {
-      await signin();
-      Router.push('/criarConta');
-    }
-  
+   
     function goHome() {
       Router.push('/');
     }
     function goEditProduct() {
-      Router.push('/ttt');
+      Router.push('/listMyProducts');
     }
-    function goCreateProduct() {
-      Router.push('/createProduct');
-    }
+
     function goMyPerfil() {
       Router.push('/authFornecedor');
+    }
+    function goSuggest() {
+      Router.push('/listProducts');
     }
   
     return (
@@ -112,8 +107,8 @@ import {
                     <MenuDivider />
                     <MenuItem>Carrinho</MenuItem>
                     <MenuItem onClick={() => { goMyPerfil() }} >Abrir meu Perfil</MenuItem>
-                    <MenuItem onClick={() => { goEditProduct() }} >Editar Produto</MenuItem>
-                    <MenuItem onClick={() => { goCreateProduct() }} >Criar Produto</MenuItem>
+                    <MenuItem onClick={() => { goEditProduct() }} >Meus Produtos</MenuItem>
+                    <MenuItem onClick={() => { goSuggest() }} >Cadastro de Produto</MenuItem>
                     <MenuItem onClick={() => { goHome() }} > Deslogar </MenuItem>
                   </MenuList>
                 </Menu>

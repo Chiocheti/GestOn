@@ -61,7 +61,11 @@ export default function navbarLogOff() {
   }
 
   async function LoginADM() {
-    Router.push('/Login_CadastroAdm');
+    Router.push('/telaDoADM');
+  }
+
+  async function CadastrarADM() {
+    Router.push('/CadastroAdm');
   }
 
   async function cadastro() {
@@ -118,12 +122,19 @@ export default function navbarLogOff() {
                   leftIcon={<BsFillCartCheckFill />}>
                   Login como Consumidor
                 </Button>
-                
+
                 <Button onClick={() => { LoginADM() }}
                   w={'full'}
                   variant={'outline'}
                   leftIcon={<BsFillCartCheckFill />}>
-                  Area de Administração
+                  Logar como Administrador
+                </Button>
+
+                <Button onClick={() => { CadastrarADM() }}
+                  w={'full'}
+                  variant={'outline'}
+                  leftIcon={<BsFillCartCheckFill />}>
+                  Cadastrar Administrador
                 </Button>
               </Stack>
             </MenuList>

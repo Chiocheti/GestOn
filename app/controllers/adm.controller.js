@@ -53,6 +53,22 @@ exports.findOneById = (req, res) => {
   });
 };
 
+exports.findOneByIdAndSenha = (req, res) => {
+  Adm.findByIdAndSenha(req.params.idFuncionario , req.params.senha , (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found adm with idFuncionario ${req.params.idFuncionario} ${req.params.senha}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving adm with idFuncionario " + req.params.idFuncionario + req.params.senha
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 // Update a Adm identified by the idFuncionario in the request
 exports.update = (req, res) => {
   // Validate Request

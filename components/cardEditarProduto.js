@@ -21,8 +21,14 @@ import { FcLike, FcCurrencyExchange , FcInfo} from "react-icons/fc";
 import React from 'react';
 
 
-export default function cardProduto({property}) {
-
+export default function cardProduto() {
+    const property = {
+        nome: "Milhão",
+        descricaoLonga: "descricaoLongaProduto",
+        descricaoCurta: "descricaoProduto",
+        linkImg: "https://agristore.com/image/cache/catalog/Di%20Solo/milho-ipanema-20kg-1200x1200.png",
+        marca: "marcaProduto"
+    }
     return (
         <Box w='700px' borderWidth='1px' borderRadius='lg' overflow='hidden' margin='10px' padding='10px'>
             <Center>
