@@ -41,7 +41,7 @@ export default function telaDoADM() {
     console.log("senha")
     console.log(senha)
 
-    function loadTags(id) {
+    function loadTags() {
 
         var lista = document.getElementById('tags');
         lista.hidden = false;
@@ -324,6 +324,7 @@ export default function telaDoADM() {
                     </Stack>
                 </div>
             </Center>
+
             <div id='posLogin' hidden>
                 <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
                     <Flex
@@ -395,18 +396,11 @@ export default function telaDoADM() {
                                 </Button>
                             </Stack>
                         </div>
-
                         <Heading>Editar dados de Administrador</Heading>
-
                     </Flex>
-
                     <Center>
-
                         <Divider orientation='vertical' />
-
                     </Center>
-
-
                     <Flex flex={1}>
                         <Stack >
                             <Flex >
@@ -438,11 +432,10 @@ export default function telaDoADM() {
                                                 >
                                                     Mostrar Tags cadastradas
                                                 </Button>
-
                                             </Flex>
-                                                <div id='tags' hidden={true} >
-                                                    <Card tags={tags} />
-                                                </div>
+                                            <div id='tags' hidden={true} >
+                                                <Card tags={tags} />
+                                            </div>
                                         </Stack>
                                     </Stack>
                                 </Stack>

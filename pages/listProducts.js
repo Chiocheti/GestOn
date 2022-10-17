@@ -11,11 +11,16 @@ import Router from "next/router";
 import NavbarLogOn from '../components/navbarLogOnFornecedor';
 import { React, useState } from 'react';
 import Axios from 'axios';
+import UseAuth from '../hooks/useAuth'
 
 function goCreateProduct() {
     Router.push('/createProduct');
 }
-export default function editProdrutro() {
+
+export default function editProduto() {
+
+    const { user, signin, signout } = UseAuth();
+
     var [produtos, setProdutos] = useState([1, 2]);
 
     var options = { method: 'GET', url: 'http://localhost:3000/api/produto' };
@@ -28,7 +33,6 @@ export default function editProdrutro() {
         }).catch(function (error) {
             console.error(error);
         });
-
     }
     return (
         <>

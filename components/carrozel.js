@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 
-import Item from '../components/cardProdutoSg'
+import Item from './CardCadastrarProdutoFornecedor'
 
 export default function Cazzorel({ produtos }) {
     return (

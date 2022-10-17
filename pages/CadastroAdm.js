@@ -58,10 +58,10 @@ export default function SplitScreen() {
         console.log(telefone);
 
 
-        if (senha != confirmeSenha || senha.length <= 7) {
+        if (senha != confirmeSenha || senha.length < 5) {
             toast({
                 title: 'Senhas não conferem',
-                description: "São permitidas apenas senhas com mais de 6 caracteres",
+                description: "São permitidas apenas senhas com 5 ou mais caracteres",
                 status: 'warning',
                 duration: 3000,
                 isClosable: true,
@@ -118,6 +118,8 @@ export default function SplitScreen() {
                             const telefone = document.getElementById("telefone").value = "";
                             const senha = document.getElementById("senha").value = "";
                             const confirmeSenha = document.getElementById("confirmeSenha").value = "";
+                            
+                            Router.push("/telaDoADM")
                         }).catch(function (error) {
                             console.log(error);
                         })

@@ -1,9 +1,9 @@
 {
     "app": 3001,
 
-    "host": "140.238.184.159",
-    "user": "gabriel",
-    "password": "chiocheti",
+    "host": "localhost",
+    "user": "root",
+    "password": "1234",
     "database": "gestON",
     "port": 3306,
 

@@ -21,7 +21,6 @@ import { AspectRatio, useToast } from '@chakra-ui/react'
 import Axios from 'axios';
 import Router from "next/router";
 import React, { useState } from 'react';
-import { EditIcon, CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { FcPhoneAndroid, FcApprove , FcClock } from "react-icons/fc";
 
 export default function autentificado() {
