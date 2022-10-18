@@ -1,10 +1,10 @@
 {
     "app": 3001,
 
-    "host": "localhost",
-    "user": "root",
-    "password": "1234",
-    "database": "gestON",
+    "host": "135.148.154.150",
+    "user": "gabriel",
+    "password": "chiocheti",
+    "database": "geston",
     "port": 3306,
 
     "apiKey": "AIzaSyBf0DSUQdh_qPNKzVDcxVAtInKSup-EYu0",
