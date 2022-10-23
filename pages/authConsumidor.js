@@ -41,8 +41,6 @@ export default function autentificado(text) {
 
     var [enderecos, setEnderecos] = useState([1, 2]);
 
-    //var usuario = null
-
     console.log("Pagina de Consumidor Identificado")
     console.log(user);
 
@@ -141,99 +139,70 @@ export default function autentificado(text) {
 
     }
 
-    function mudaNome() {
+    function salva() {
         var novoNome = document.getElementById('nome').value;
-
-        if (novoNome.length < 1) {
-            toast({
-                title: 'Insira um nome valido',
-                description: "Nome invalido",
-                status: 'warning',
-                duration: 9000,
-                isClosable: true,
-            })
-        } else {
-
-            var options = {
-                method: 'PUT',
-                url: `http://localhost:3000/api/consumidor/${idC}`,
-                headers: { 'Content-Type': 'application/json' },
-                data: { nome: novoNome, cpf: cpf, telefone: telefone },
-            };
-
-            Axios.request(options).then(function (response) {
-                console.log(response.data);
-                toast({
-                    title: 'Nome Alterado com sucesso',
-                    description: `Novo nome: ${novoNome}`,
-                    status: 'success',
-                    duration: 5000,
-                    isClosable: true,
-                })
-            }).catch(function (error) {
-                console.error(error);
-                toast({
-                    title: 'Falha ao Alterar o nome',
-                    description: `Erro ao alterar o nome !!!`,
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                })
-            });
-        }
-    }
-
-    function mudaTelefone() {
         var novoTelefone = document.getElementById('telefone').value;
         var telefoneFormatado = formatadorDeTelefone(novoTelefone);
+        var telefoneParaSalvar = null
 
-        if (novoTelefone.length != 11 || isNaN(novoTelefone || !testaTelefone(telefoneFormatado))) {
+        if (novoNome == "" || novoNome == null) {
+            novoNome = nome
+        } else {
+            if (novoNome.length < 1) {
+                toast({
+                    title: 'Nome invalido',
+                    description: "Insira um nome valido",
+                    status: 'warning',
+                    duration: 9000,
+                    isClosable: true,
+                })
+                novoNome = nome
+            }
+        }
+        if (novoTelefone == "" || novoTelefone == null) {
+            telefoneParaSalvar = telefone
+        } else {
+            if (novoTelefone.length != 11 || isNaN(novoTelefone || !testaTelefone(telefoneFormatado))) {
+                toast({
+                    title: 'Insira um Numero de Telefone valido',
+                    description: "Valor de Telefone invalido",
+                    status: 'warning',
+                    duration: 9000,
+                    isClosable: true,
+                })
+                telefoneParaSalvar = telefone
+            } else {
+                telefoneParaSalvar = formataPraSalvar(telefoneFormatado)
+            }
+        }
+        var options = {
+            method: 'PUT',
+            url: `http://localhost:3000/api/consumidor/${idC}`,
+            headers: { 'Content-Type': 'application/json' },
+            data: { nome: novoNome, cpf: cpf, telefone: telefoneParaSalvar },
+        };
+        Axios.request(options).then(function (response) {
+            console.log(response.data);
             toast({
-                title: 'Insira um Numero de Telefone valido',
-                description: "Valor de Telefone invalido",
-                status: 'warning',
-                duration: 9000,
+                title: 'Dados alterados com sucesso',
+                description: `Novo Telefone: ${telefoneFormatado} | Novo nome: ${novoNome}`,
+                status: 'success',
+                duration: 5000,
                 isClosable: true,
             })
-        } else {
-            var telefoneParaSalvar = formataPraSalvar(telefoneFormatado)
-            var options = {
-                method: 'PUT',
-                url: `http://localhost:3000/api/consumidor/${idC}`,
-                headers: { 'Content-Type': 'application/json' },
-                data: { nome: nome, cpf: cpf, telefone: telefoneParaSalvar },
-            };
-
-            Axios.request(options).then(function (response) {
-                console.log(response.data);
-                toast({
-                    title: 'Telefone Alterado com sucesso',
-                    description: `Novo Telefone: ${novoTelefone}`,
-                    status: 'success',
-                    duration: 5000,
-                    isClosable: true,
-                })
-            }).catch(function (error) {
-                console.error(error);
-                toast({
-                    title: 'Falha ao Alterar o telefone',
-                    description: `Erro ao alterar o telefone !!!`,
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                })
-            });
-        }
+            setTelefone(telefoneParaSalvar)
+            setNome(novoNome)
+        }).catch(function (error) {
+            console.error(error);
+            toast({
+                title: 'Falha ao Alterar dados',
+                description: `Erro interno ao alterar dados !!!`,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })
+        });
     }
-
-    const size = '96px';
-    const color = 'teal';
-
-    const pulseRing = keyframes`
-        0% {transform: scale(0.33);}
-        40%,50% {opacity: 0;}
-        100% {opacity: 0;}
-    `;
 
     return (
         <div>
@@ -267,23 +236,12 @@ export default function autentificado(text) {
 
                             <Divider />
 
-                            <Heading fontSize={'2xl'}>Nome:</Heading>
-
+                            <Heading fontSize={'2xl'}>Nome:  {nome}</Heading>
                             <Input placeholder={nome} id="nome" />
-
-                            <Button
-                                onClick={() => mudaNome()}
-                                leftIcon={<FcApprove />}
-                                colorScheme='teal'
-                                variant='solid'
-                            >
-                                Save
-                            </Button>
 
                             <Divider />
 
-                            <Heading fontSize={'2xl'}>Telefone:</Heading>
-
+                            <Heading fontSize={'2xl'}>Telefone:  {telefone}</Heading>
                             <Input placeholder={telefone} id="telefone" />
 
                             <Divider />
@@ -292,7 +250,7 @@ export default function autentificado(text) {
                                 leftIcon={<FcPhoneAndroid />}
                                 colorScheme='teal'
                                 variant='solid'
-                                onClick={() => { mudaTelefone() }}
+                                onClick={() => { salva() }}
                             >
                                 Save
                             </Button>
@@ -312,7 +270,6 @@ export default function autentificado(text) {
                     <Divider orientation='vertical' />
 
                 </Center>
-
 
                 <Flex flex={1}>
                     <Stack>

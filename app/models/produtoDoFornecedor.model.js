@@ -36,8 +36,43 @@ ProdutoDoFornecedor.findById = (idProdutoDoFornecedor, result) => {
   });
 };
 
-ProdutoDoFornecedor.findByIdProduto = (idProduto , result) => {
+ProdutoDoFornecedor.findByIdProduto = (idProduto, result) => {
   sql.query(`SELECT * FROM produtoDoFornecedor WHERE idProduto = ${idProduto}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("produtoDoFornecedor: ", res);
+    result(null, res);
+  });
+};
+
+ProdutoDoFornecedor.findThisSomethingFromIdFornecedor = (idFornecedor, result) => {
+  sql.query(`select produto.nome,
+  produto.descricaoLonga, 
+  produto.descricaoCurta, 
+  produto.linkImg, 
+  produto.marca,
+  produtoDoFornecedor.idProdutoDoFornecedor,
+  produtoDoFornecedor.preco, 
+  produtoDoFornecedor.mostrar
+  from produtoDoFornecedor
+  inner join produto
+  on produtoDoFornecedor.idProduto = produto.idProduto
+  where produtoDoFornecedor.idFornecedor =  ${idFornecedor}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("produtoDoFornecedor: ", res);
+    result(null, res);
+  });
+};
+
+ProdutoDoFornecedor.findByIdFornecedor = (idFornecedor, result) => {
+  sql.query(`SELECT * FROM produtoDoFornecedor WHERE idFornecedor = ${idFornecedor}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

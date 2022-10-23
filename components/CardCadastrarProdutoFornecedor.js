@@ -25,17 +25,24 @@ import {
     Input,
     FormControl,
     FormLabel,
-    useToast
+    useToast,
+    InputGroup,
+    InputLeftAddon
 } from '@chakra-ui/react'
 
 import UseAuth from '../hooks/useAuth'
-import { FcInfo } from "react-icons/fc";
-import React from 'react';
+import { FcInfo, FcCurrencyExchange } from "react-icons/fc";
+import React, { useState } from 'react';
 import { EditIcon } from '@chakra-ui/icons'
 import NavbarLogOn from '../components/navbarLogOnFornecedor';
 import Axios from 'axios';
 
 export default function cardProduto({ produto }) {
+
+    const format = (val) => `$` + val
+    const parse = (val) => val.replace(/^\$/, '')
+
+    const [value, setValue] = useState('1.53')
 
     console.log(produto)
 
@@ -64,24 +71,35 @@ export default function cardProduto({ produto }) {
 
         var preco = document.getElementById("preco").value;
 
-        const options = {
-            method: 'POST',
-            url: "http://localhost:3000/api/produtoDoFornecedor",
-            headers: { 'Content-Type': 'application/json' },
-            data: { idFornecedor:usuario.id , idProduto:produto.idProduto , preco:preco , mostrar:true }
-        };
-        Axios.request(options).then(function (response) {
-            console.log(response.data);
+        if (isNaN(preco) || preco == '' || preco == 0) {
             toast({
-                title: 'Conta Criada com sucesso',
-                description: "faça agora seu login",
-                status: 'success',
+                title: 'Falha ao salvar o produto',
+                description: "Digite um valor valido para o preço do produto",
+                status: 'error',
                 duration: 3000,
                 isClosable: true,
             })
-        }).catch(function (error) {
-            console.log(error);
-        })
+        } else {
+            const options = {
+                method: 'POST',
+                url: "http://localhost:3000/api/produtoDoFornecedor",
+                headers: { 'Content-Type': 'application/json' },
+                data: { idFornecedor: usuario.id, idProduto: produto.idProduto, preco: preco, mostrar: true }
+            };
+            Axios.request(options).then(function (response) {
+                console.log(response.data);
+                toast({
+                    title: 'Produto adicionado a sua loja',
+                    description: "Ele esta disponivel na sua tela de meus produtos",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                })
+                onClose()
+            }).catch(function (error) {
+                console.log(error);
+            })
+        }
     }
 
     return (
@@ -91,15 +109,16 @@ export default function cardProduto({ produto }) {
                 placement='right'
                 onClose={onClose}
                 finalFocusRef={btnRef}
+                size={"md"}
             >
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerCloseButton />
-                    <DrawerHeader>Registro de Produto</DrawerHeader>
+                    <DrawerHeader fontSize={40} >Registro de Produto</DrawerHeader>
 
                     <DrawerBody>
                         <Center>
-                            <Box fontSize={32} > {produto.nome} </Box>
+                            <Box fontSize={30} > {produto.nome} </Box>
                         </Center>
                         <Image
                             src={produto.linkImg}
@@ -108,16 +127,18 @@ export default function cardProduto({ produto }) {
                             borderRadius={10}
                         />
                         <FormControl>
-                            <FormLabel>Preço</FormLabel>
-                            <Input type='text' id='preco'/>
+                            <FormLabel fontSize={24}>Preço</FormLabel>
+                            <InputGroup>
+                                <InputLeftAddon children='R$' />
+                                <Input type='text' id='preco' placeholder="000.00" />
+                            </InputGroup>
                         </FormControl>
                     </DrawerBody>
-
                     <DrawerFooter>
                         <Button variant='outline' mr={3} onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button colorScheme='blue' onClick={()=>{salvaProduto()}} >Save</Button>
+                        <Button colorScheme='blue' onClick={() => { salvaProduto() }} >Save</Button>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>

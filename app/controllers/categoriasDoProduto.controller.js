@@ -9,7 +9,7 @@ exports.create = (req, res) => {
     }
     // Create a CategoriasDoProduto
     const categoriasDoProduto = new CategoriasDoProduto({
-        idProduto: req.body.idProduto,
+        idProdutoDoFornecedor: req.body.idProdutoDoFornecedor,
         idCategoria: req.body.idCategoria,
     });
 
@@ -52,17 +52,17 @@ exports.findOneById = (req, res) => {
         } else res.send(data);
     });
 };
-// Find a single CategoriasDoProduto by a idProduto
+// Find a single CategoriasDoProduto by a idProdutoDoFornecedor
 exports.findOneByIdProduto = (req, res) => {
-    CategoriasDoProduto.findByIdProduto(req.params.idProduto, (err, data) => {
+    CategoriasDoProduto.findByIdProduto(req.params.idProdutoDoFornecedor, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found CategoriasDoProduto with idProduto ${req.params.idProduto}.`
+                    message: `Not found CategoriasDoProduto with idProdutoDoFornecedor ${req.params.idProdutoDoFornecedor}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Error retrieving CategoriasDoProduto with idProduto " + req.params.idProduto
+                    message: "Error retrieving CategoriasDoProduto with idProdutoDoFornecedor " + req.params.idProdutoDoFornecedor
                 });
             }
         } else res.send(data);

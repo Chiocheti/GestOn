@@ -5,7 +5,6 @@ Box
 
 import Item from './itemTags.js'
 
-
 export default function card({ tags }) {
     return (
         <>

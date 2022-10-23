@@ -12,7 +12,7 @@ module.exports = app => {
     router.get("/:idCategoriasDoProduto", categoriasDoProduto.findOneById);
 
     // Retrieve a single categoriasDoProduto with idCategoriasDoProduto
-    router.get("/produto/:idProduto", categoriasDoProduto.findOneByIdProduto);
+    router.get("/produto/:idProdutoDoFornecedor", categoriasDoProduto.findOneByIdProduto);
 
     // Retrieve a single categoriasDoProduto with idCategoriasDoProduto
     router.get("/categoria/:idCategoria", categoriasDoProduto.findOneByIdCategoria);

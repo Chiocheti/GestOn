@@ -1,7 +1,7 @@
 const sql = require("./db.js");
 // constructor
 const CategoriasDoProduto = function (categoriasDoProduto) {
-  this.idProduto = categoriasDoProduto.idProduto;
+  this.idProdutoDoFornecedor = categoriasDoProduto.idProdutoDoFornecedor;
   this.idCategoria = categoriasDoProduto.idCategoria;
   };
 
@@ -34,8 +34,8 @@ CategoriasDoProduto.findById = (idCategoriasDoProduto, result) => {
   });
 };
 
-CategoriasDoProduto.findByIdProduto = (idProduto , result) => {
-  sql.query(`SELECT * FROM categoriasDoProduto WHERE idProduto = ${idProduto}`, (err, res) => {
+CategoriasDoProduto.findByIdProduto = (idProdutoDoFornecedor , result) => {
+  sql.query(`SELECT * FROM categoriasDoProduto WHERE idProdutoDoFornecedor = ${idProdutoDoFornecedor}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -100,7 +100,7 @@ CategoriasDoProduto.removeFromIdCategoria = (idCategoria, result) => {
       result({ kind: "not_found" }, null);
       return;
     }
-    console.log("deleted CategoriasDoProduto with idCategorias: ", idCategorias);
+    console.log("deleted CategoriasDoProduto with idCategorias: ", idCategoria);
     result(null, res);
   });
 };
@@ -112,7 +112,7 @@ CategoriasDoProduto.removeAll = result => {
       result(null, err);
       return;
     }
-    console.log(`deleted ${res.affectedRows} idCategorias`);
+    console.log(`deleted ${res.affectedRows} idCategoria`);
     result(null, res);
   });
 };

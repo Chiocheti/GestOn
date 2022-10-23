@@ -105,7 +105,7 @@ import {
                     </Center>
                     <br />
                     <MenuDivider />
-                    <MenuItem>Carrinho</MenuItem>
+                    
                     <MenuItem onClick={() => { goMyPerfil() }} >Abrir meu Perfil</MenuItem>
                     <MenuItem onClick={() => { goEditProduct() }} >Meus Produtos</MenuItem>
                     <MenuItem onClick={() => { goSuggest() }} >Cadastro de Produto</MenuItem>

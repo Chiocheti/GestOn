@@ -13,6 +13,7 @@ import {
 
 import Axios from 'axios';
 import Router from "next/router";
+import NavbarADM from '../components/navbarADM';
 
 export default function SplitScreen() {
     const toast = useToast()
@@ -130,7 +131,11 @@ export default function SplitScreen() {
     }
 
     return (
+
+        <>
+        <NavbarADM/>
         <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+            
             <Flex flex={1}>
                 <Flex p={8} flex={1} align={'center'} justify={'center'}>
                     <Stack spacing={4} w={'full'} maxW={'md'}>
@@ -170,5 +175,6 @@ export default function SplitScreen() {
                 </Flex>
             </Flex>
         </Stack>
+        </>
     );
 }

@@ -5,32 +5,56 @@ import {
     SimpleGrid,
     Button,
 } from '@chakra-ui/react';
+
 import React, { useState } from 'react';
-import "keen-slider/keen-slider.min.css"
 import NavbarLogOn from '../components/navbarLogOnFornecedor';
-import Router from "next/router";
-
-
-function goEditProduct() {
-    Router.push('/editProduct');
-}
+import Componente from "../components/componenteMyProducts"
+import UseAuth from '../hooks/useAuth'
+import Axios from 'axios';
 
 export default function App() {
 
-    function isLista() {
-        const elementLista = document.getElementById("Lista");
-        elementLista.hidden = false;
+    const { user, signin, signout } = UseAuth();
 
-        const elementGrid = document.getElementById("Grid");
-        elementGrid.hidden = true;
+    var [produtos, setProdutos] = useState(() => [1, 2]);
+    var usuario = null;
+
+    function carregaProdutos() {
+        const options = {
+            method: 'GET',
+            url: `http://localhost:3000/api/usuario/cadastro/${user.email}/fornecedor`
+        };
+
+        Axios.request(options).then(function (response) {
+            console.log(response.data);
+            usuario = response.data;
+            console.log("Usuario: ");
+            console.log(usuario);
+            loadProdutos(usuario.id);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
-    function isGrid() {
-        const elementLista = document.getElementById("Lista");
-        elementLista.hidden = true;
+    function loadProdutos(id) {
 
-        const elementGrid = document.getElementById("Grid");
-        elementGrid.hidden = false;
+        const options2 = {
+            method: 'GET',
+            url: `http://localhost:3000/api/produtoDoFornecedor/getProduto/${id}`
+        };
+        Axios.request(options2).then(function (response) {
+            console.log(response.data);
+            var produtosLidos = response.data;
+            setProdutos(() => produtosLidos)
+            console.log('produtosLidos ----------------');
+            console.log(produtos);
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+        document.getElementById("componente").hidden = false;
+
     }
 
     return (
@@ -38,62 +62,33 @@ export default function App() {
             <NavbarLogOn />
             <Center>
                 <Heading
+                    marginTop={10}
                     fontWeight={600}
                     fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                     lineHeight={'110%'}>
-                    <Text as={'span'} color={'green.400'}>
+                    <Text as={'span'} color={'green.400'} >
                         EDIÇÃO DE PRODUTO
                     </Text>
                 </Heading>
             </Center>
+
+            <Center marginTop={10} marginBottom={10}>
+                <Button bg={'blue.400'}
+                    color={'white'}
+
+                    _hover={{
+                        bg: 'blue.500',
+                    }} size='lg' onClick={() => carregaProdutos()}>
+                    Carregar Produtos
+                </Button>
+            </Center>
             <Center>
-                <br /><br /><br /><br /><br /><br />
-                <Text color={'gray.500'}>
+                <Text color={'gray.500'} fontSize={35}>
                     Escolha o produto que deseja editar
                 </Text>
             </Center>
-            <div id='Grid' style={{ margin: '100px', paddingRight: '5px' }} hidden>
-                <Button bg={'blue.400'}
-                    color={'white'}
-
-                    _hover={{
-                        bg: 'blue.500',
-                    }} size='xs' onClick={isLista}>
-                    LISTADO:
-                </Button>
-                <br />
-                <br />
-                <SimpleGrid columns={5} spacing={2}>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                </SimpleGrid>
-            </div>
-            <div id='Lista' style={{ margin: '100px', paddingRight: '5px' }} >
-                <Button bg={'blue.400'}
-                    color={'white'}
-
-                    _hover={{
-                        bg: 'blue.500',
-                    }} size='xs' onClick={isGrid}>
-                    LADO A LADO:
-                </Button>
-                <br /><br />
-                <SimpleGrid columns={1} spacingX='20px' spacingY='20px'>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                    <img onClick={() => goEditProduct()} src='https://i.imgur.com/iLripy4.png' alt='JS' height='80px'></img>
-                </SimpleGrid>
+            <div hidden id="componente">
+                <Componente produtos={produtos}  />
             </div>
         </>
     )

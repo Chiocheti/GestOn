@@ -6,20 +6,35 @@ import {
     FormControl,
     FormLabel,
     Heading,
+    Image,
+    Box,
     Center,
     Divider,
-    useDisclosure,
+    Text,
     useToast,
-    Tag,
-    SimpleGrid
+    Textarea,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure,
 } from '@chakra-ui/react';
 
 import React, { useState } from 'react';
 import { FcPhoneAndroid } from "react-icons/fc";
 import Axios from 'axios';
 import Card from '../components/cardTags.js';
+import NavbarADM from '../components/navbarADM.js';
 
 export default function telaDoADM() {
+
+    const initialRef = React.useRef(null)
+    const finalRef = React.useRef(null)
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     const toast = useToast()
 
@@ -119,6 +134,7 @@ export default function telaDoADM() {
                     duration: 5000,
                     isClosable: true,
                 })
+                setNome(novoNome)
             }).catch(function (error) {
                 console.error(error);
                 toast({
@@ -162,6 +178,7 @@ export default function telaDoADM() {
                     duration: 5000,
                     isClosable: true,
                 })
+                setTelefone(novoTelefone)
             }).catch(function (error) {
                 console.error(error);
                 toast({
@@ -204,6 +221,7 @@ export default function telaDoADM() {
                     duration: 5000,
                     isClosable: true,
                 })
+                setSenha(novaSenha)
             }).catch(function (error) {
                 console.error(error);
                 toast({
@@ -297,155 +315,215 @@ export default function telaDoADM() {
         }
     }
 
+    let [value, setValue] = React.useState('')
+
+    let handleInputChange = (e) => {
+        let inputValue = e.target.value
+        setValue(inputValue)
+    }
+
+
     return (
         <div>
-            <Center>
+
+            <Stack>
+
                 <div id='parteDeLogin'>
-                    <Stack spacing={4} w={'full'} maxW={'md'}>
-                        <Heading fontSize={'2xl'}>Logar como Administrador</Heading>
-                        <FormControl >
-                            <FormLabel>ID do Funcionario</FormLabel>
-                            <Input id="validaIdFuncionario" />
-                        </FormControl>
-                        <FormControl >
-                            <FormLabel>Senha</FormLabel>
-                            <Input id="validaSenha" />
-                        </FormControl>
-                        <Stack spacing={6}>
-                            <Stack
-                                direction={{ base: 'column', sm: 'row' }}
-                                align={'start'}
-                                justify={'space-between'}>
-                            </Stack>
-                            <Button colorScheme={'blue'} variant={'solid'} onClick={fazerLogin}>
-                                Login
-                            </Button>
-                        </Stack>
-                    </Stack>
+                    <>
+                        <NavbarADM />
+                        <Center minHeight='100vh' width='full' align='center' justifyContent='center'>
+                            <Box
+                                borderWidth={1}
+                                px={4}
+                                width='full'
+                                maxWidth='950px'
+                                borderRadius={15}
+                                textAlign='center'
+                                boxShadow='lg'
+                                my={140}>
+                                <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+                                    <Flex p={8} flex={1} align={'center'} justify={'center'}>
+                                        <Stack spacing={4} w={'full'} maxW={'md'}>
+                                            <Heading fontSize={'2xl'}>Logar como Administrador</Heading>
+                                            <FormControl >
+                                                <FormLabel>ID do Funcionario</FormLabel>
+                                                <Input id="validaIdFuncionario" />
+
+                                            </FormControl>
+                                            <FormControl >
+                                                <FormLabel>Senha</FormLabel>
+                                                <Input type="password" id="validaSenha" />
+                                            </FormControl>
+                                            <Stack spacing={6}>
+                                                <Stack
+                                                    direction={{ base: 'column', sm: 'row' }}
+                                                    align={'start'}
+                                                    justify={'space-between'}>
+                                                </Stack>
+                                                <Button colorScheme={'blue'} variant={'solid'} onClick={fazerLogin}>
+                                                    Login
+                                                </Button>
+                                            </Stack>
+                                        </Stack>
+
+                                    </Flex>
+                                    <Flex flex={1}>
+                                        <Image
+                                            objectFit={'cover'}
+                                            rounded={'md'}
+                                            borderRadius={15}
+                                            alt={'feature image'}
+                                            src={
+                                                'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
+                                            }
+                                        />
+                                    </Flex>
+                                </Stack>
+
+                            </Box>
+                        </Center>
+                    </>
                 </div>
-            </Center>
+            </Stack>
 
             <div id='posLogin' hidden>
-                <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-                    <Flex
-                        p={8}
-                        flex={1}
-                        lign={'center'}
-                        justify={'center'}
-                    >
-                        <div id='atualizarRegistro'>
-                            <Stack spacing={4} w={'full'} maxW={'md'}>
-                                <Stack direction={['column', 'row']} spacing={6}>
-                                    <Center w="full">
-                                        <Heading colorScheme='teal' w="full">
-                                            ADMINISTRADOR
-                                        </Heading>
-                                    </Center>
-                                </Stack>
-                                <Divider />
-                                <FormControl >
-                                    <Heading>ID :</Heading>
-                                </FormControl>
-                                <FormLabel> Nome:
-                                </FormLabel>
-                                <Input
-                                    placeholder={nome} id="nome"
-                                />
-                                <Button
-                                    leftIcon={<FcPhoneAndroid />}
-                                    colorScheme='teal'
-                                    variant='solid'
-                                    onClick={() => mudaNome()}
-                                >
-                                    Save
-                                </Button>
-                                <FormLabel> Telefone:
-                                </FormLabel>
-                                <Input
-                                    placeholder={telefone} id='telefone'
-                                />
-                                <Button
-                                    leftIcon={<FcPhoneAndroid />}
-                                    colorScheme='teal'
-                                    variant='solid'
-                                    onClick={() => mudaTelefone()}
-                                >
-                                    Save
-                                </Button>
-                                <FormControl >
-                                    <Heading>Senha:</Heading>
-                                </FormControl>
-                                <FormLabel> nova Senha:
-                                </FormLabel>
-                                <Input
-                                    placeholder='********' id="senha"
-                                />
-                                <FormLabel> Confirme a nova Senha:
-                                </FormLabel>
-                                <Input
-                                    placeholder='********' id="confirmaSenha"
-                                />
-                                <Button
-                                    leftIcon={<FcPhoneAndroid />}
-                                    colorScheme='teal'
-                                    variant='solid'
-                                    onClick={() => mudaSenha()}
+                <NavbarADM />
+                <Box textAlign="center">
 
-                                >
-                                    Save
-                                </Button>
-                            </Stack>
-                        </div>
-                        <Heading>Editar dados de Administrador</Heading>
-                    </Flex>
-                    <Center>
-                        <Divider orientation='vertical' />
-                    </Center>
-                    <Flex flex={1}>
-                        <Stack >
-                            <Flex >
-                                <Stack >
+                    <Heading as="h2" size="xl" mt={6} mb={2}>
+                        Administrador
+                    </Heading>
+                </Box>
+                <Center minHeight='100vh' width='full' justifyContent='center'>
+
+                    <Box
+                        px={4}
+                        width='full'
+                        maxWidth='1400px'
+                        borderRadius={15}
+                        textAlign='center'
+                        boxShadow='lg'
+                        my={25}>
+                        <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+                            <Flex id='atualizarRegistro' p={8} flex={1} align={'center'} justify={'center'}>
+                                <Stack w={'full'} maxW={'md'}>
+                                    <FormLabel>
+                                        <Heading >ID: {idFuncionario}</Heading>
+                                    </FormLabel>
+
+                                    <FormLabel> Nome:  {nome}
+                                    </FormLabel>
+                                    <FormLabel> Telefone:  {telefone}
+                                    </FormLabel>
+                                    <Divider />
+                                    <FormLabel >
+                                        <Heading>Atualizar Dados de Usuario</Heading>
+                                    </FormLabel>
+
+                                    <FormLabel> Nome:  {nome}
+                                    </FormLabel>
+                                    <Input
+                                        id="nome"
+                                    />
+                                    <FormLabel> Telefone:  {telefone}
+                                    </FormLabel>
+                                    <Input
+                                        id='telefone'
+                                    />
+
+                                    <FormLabel> nova Senha:
+                                    </FormLabel>
+                                    <Input
+                                        placeholder='********' id="senha"
+                                    />
+                                    <FormLabel> Confirme a nova Senha:
+                                    </FormLabel>
+                                    <Input
+                                        placeholder='********' id="confirmaSenha"
+                                    />
+                                    <Button
+                                        leftIcon={<FcPhoneAndroid />}
+                                        colorScheme='teal'
+                                        variant='solid'
+
+                                    >
+                                        Save
+                                    </Button>
+                                </Stack>
+                            </Flex>
+                            <Flex flex={1}>
+                                <Image
+                                    alt={'Login Image'}
+                                    objectFit={'cover'}
+                                    borderRadius={15}
+                                    src={
+                                        'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'
+                                    }
+                                />
+                            </Flex>
+                        </Stack>
+                    </Box>
+                </Center>
+                <Center>
+                    <Divider />
+                </Center>
+                <Box textAlign="center">
+
+                    <Heading as="h2" size="xl" mt={6} mb={2}>
+                        Espaço de Funções
+                    </Heading>
+                </Box>
+                <Box
+                    borderWidth={0}
+                    px={4}
+                    width='full'
+                    maxWidth='1400px'
+                    borderRadius={15}
+                    boxShadow='lg'
+                    my={50}>
+                    <Button onClick={onOpen}>Funções Categorias</Button>
+                    <Modal
+                        initialFocusRef={initialRef}
+                        isOpen={isOpen}
+                        onClose={onClose}
+                    >
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader>CATEGORIAS</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody pb={6}>
+                                <Stack w={'full'} maxW={'md'}>
                                     <FormControl >
                                         <Heading>Cadastrar Categoria</Heading>
                                         <Input id='nomeCategoria' placeholder='Nome da Categoria: ' />
                                     </FormControl>
-                                    <Stack spacing={6}>
-                                        <Stack
-                                            direction={{ base: 'column', sm: 'row' }}
-                                            align={'start'}
-                                            justify={'space-between'}>
-                                        </Stack>
-                                        <Button colorScheme={'teal'} variant={'solid'} onClick={() => { cadastraCategoria() }}>
-                                            Cadastrar
-                                        </Button>
-                                        <Divider />
-                                        <Stack>
-                                            <Flex>
-                                                <Stack>
-                                                    <Heading>Lista de Categoria</Heading>
-                                                </Stack>
-                                                <Button
-                                                    leftIcon={<FcPhoneAndroid />}
-                                                    colorScheme='teal'
-                                                    variant='solid'
-                                                    onClick={() => { loadTags(idFuncionario) }}
-                                                >
-                                                    Mostrar Tags cadastradas
-                                                </Button>
-                                            </Flex>
-                                            <div id='tags' hidden={true} >
-                                                <Card tags={tags} />
-                                            </div>
-                                        </Stack>
-                                    </Stack>
+                                    <Button colorScheme={'teal'} variant={'solid'} onClick={() => { cadastraCategoria() }}>
+                                        Cadastrar
+                                    </Button>
                                 </Stack>
-                            </Flex>
-                        </Stack>
-                    </Flex>
-                </Stack>
-                <Center>
-                    <Divider />
-                </Center>
+                                <Stack>
+                                    <Flex>
+                                        <Heading>Lista de Categoria</Heading>
+                                    </Flex>
+                                    <Flex>
+                                        <Button
+                                            colorScheme='teal'
+                                            variant='solid'
+                                            onClick={() => { loadTags(idFuncionario) }}>
+                                            Mostrar/Atualizar Tags Cadastradas
+                                        </Button>
+                                    </Flex>
+                                    <div id='tags' hidden={true} >
+                                        <Card tags={tags} />
+                                    </div>
+                                </Stack>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button onClick={onClose}>Fechar</Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+                </Box>
             </div>
         </div >
     )

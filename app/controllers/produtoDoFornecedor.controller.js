@@ -71,6 +71,40 @@ exports.findOneByIdProduto = (req, res) => {
     });
 };
 
+// Find a single ProdutoDoFornecedor by a idFornecedor
+exports.findOneByIdFornecedor = (req, res) => {
+    ProdutoDoFornecedor.findByIdFornecedor(req.params.idFornecedor, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found ProdutoDoFornecedor with idFornecedor ${req.params.idFornecedor}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving ProdutoDoFornecedor with idFornecedor " + req.params.idFornecedor
+                });
+            }
+        } else res.send(data);
+    });
+};
+
+// Find something from ProdutoDoFornecedor by a idFornecedor
+exports.findSomethingFromIdFornecedor = (req, res) => {
+    ProdutoDoFornecedor.findThisSomethingFromIdFornecedor(req.params.idFornecedor, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found list and produto ProdutoDoFornecedor with idFornecedor ${req.params.idFornecedor}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving list and produto ProdutoDoFornecedor with idFornecedor: " + req.params.idFornecedor
+                });
+            }
+        } else res.send(data);
+    });
+};
+
 // Update a ProdutoDoFornecedor identified by the idProdutoDoFornecedor in the request
 exports.update = (req, res) => {
     // Validate Request

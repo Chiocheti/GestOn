@@ -10,6 +10,7 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    Center,
 } from '@chakra-ui/react'
 
 import React, { useState } from 'react';
@@ -390,193 +391,190 @@ export default function criarConta() {
         console.log("hora_fecha: " + hora_fecha)
     }
 
-
-
     return (
         <>
-
             <NavbarLogOn />
-
-            <div
-                spacing={1}
+            <Center
                 w={'full'}
-                maxW={'md'}
-                align={['flex-start', 'center']}
-                alignSelf={'center'}
-                justify={'center'}
-                direction={['column']}
-                position={'relative'}
-                rounded={'xl'}
-                boxShadow={'lg'}
-                p={6}
-                my={12}>
-                <flex>
-                    <Stack spacing={1} align='flex-start' w='full'>
+                h={'100vh'}
+                backgroundSize={'cover'}
+                backgroundPosition={'center center'}
+            >
+                <div
+                    spacing={1}
+                    w={'full'}
+                    maxW={'md'}
+                    align={['flex-start', 'center']}
+                    alignSelf={'center'}
+                    justify={'center'}
+                    direction={['column']}
+                    position={'relative'}
+                    rounded={'xl'}
+                    boxShadow={'lg'}
+                    p={6}
+                    my={12}
+                    height={'300px'}
+                    width={'full'}
+                    overflow={'hidden'}>
 
-                        <Stack spacing={1} align={['flex-start', 'center']} w='full'>
-                            <Heading as="h2" size="xl" mt={6} mb={2}>
-                                Cadastro
-                            </Heading>
-                            <Text as="h2" size="xl" mt={6} mb={2}>
-                                Prossiga com o seu cadastro preenchendo os dados abaixo
-                            </Text>
-                        </Stack>
-                    </Stack>
-                    <Box>
-                        <center py={6}>
-                            <Stack
-                                borderWidth="1px"
-                                borderRadius="lg"
-                                w={{ sm: '100%', md: '540px' }}
-                                bg={useColorModeValue('white', 'gray.900')}
-                                boxShadow={'2xl'}
-                            >
-                                <Stack
-                                    direction={['column', 'row']}
-                                    spacing={6}
-                                    align={'center'}
-                                    justify={'center'}>
-                                    <center
-                                        lineHeight={1.1}
-                                        fontSize={{ base: '2xl', sm: '3xl' }}
-                                    >
-                                        <FormControl isRequired>
-                                            <FormLabel> Email:
-                                            </FormLabel>
-                                            <Input
-                                                id='email'
-                                                type='email'
-                                                value={user.email}
-                                                readOnly />
-                                        </FormControl>
+                    <flex>
+                        <Stack spacing={1} align='flex-start' w='full'>
 
-                                    </center>
-                                </Stack>
-                                <Stack
-                                    direction={['column', 'row']}
-                                    spacing={6} align={'center'}
-                                    justify={'center'}
-                                >
-                                    <center
-                                        id='fornecedor'
-                                        hidden={true}
-                                        align={['flex-start', 'center']}>
-                                        <Stack >
-                                            <Button bg={'blue.400'}
-                                                color={'white'}
-                                                w="full"
-                                                _hover={{
-                                                    bg: 'blue.500',
-                                                }} size='xs' onClick={isConsumidor}>
-                                                Criar Conta como Consumidor:
-                                            </Button>
-                                        </Stack>
-                                        <FormControl isRequired>
-                                            <FormLabel> Nome Fantasia:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Nome: '
-                                                id='nomeFantasia' />
-
-                                            <FormLabel> CNPJ:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Ex: XXXXXXXXXXXXXXXXXX'
-                                                id='cnpj' />
-
-                                            <FormLabel> Telefone:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Ex: 19999999999'
-                                                id='telefoneFornecedor' />
-
-                                            <FormLabel> Hora Abre:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Ex: 08:00:00 '
-                                                id='hora_abre' />
-
-                                            <FormLabel> Hora Fecha:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Ex: 20:00:00 '
-                                                id='hora_fecha' />
-
-                                            <center>
-                                                <Checkbox
-                                                    defaultChecked>
-                                                    Manter Conectado
-                                                </Checkbox>
-                                            </center>
-                                            <Button
-                                                colorScheme='teal'
-                                                variant='outline'
-                                                onClick=
-                                                {() => { verificaFornecedor() }}
-                                                align={['center']}>
-                                                Criar Conta
-                                            </Button>
-                                        </FormControl>
-                                    </center>
-                                </Stack>
-                                <Stack direction={['column', 'row']} spacing={6} align={'center'}
-                                    justify={'center'}>
-                                    <center
-                                        id='consumidor'
-                                        bg='#F0FFF4'
-                                        align={['flex-start', 'center']}>
-                                        <Stack >
-                                            <Button bg={'red.400'}
-                                                color={'white'}
-                                                w="full"
-                                                _hover={{
-                                                    bg: 'red.500',
-                                                }} size='xs' onClick={isFornecedor}>
-                                                Criar Conta como Fornecedor:
-                                            </Button>
-                                        </Stack>
-                                        <FormControl isRequired>
-                                            <FormLabel > Nome:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Nome: '
-                                                id='nomeConsumidor' />
-
-                                            <FormLabel> CPF:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Ex: 12345678911'
-                                                id='cpf' />
-
-                                            <FormLabel> Telefone:
-                                            </FormLabel>
-                                            <Input
-                                                placeholder='Ex: 19999999999'
-                                                id='telefoneConsumidor' />
-
-                                            <center>
-                                                <Checkbox
-                                                    defaultChecked>
-                                                    Manter Conectado
-                                                </Checkbox>
-                                            </center>
-                                            <Button
-                                                colorScheme='teal'
-                                                variant='outline'
-                                                onClick=
-                                                {() => { verificaConsumidor() }}
-                                                align={['center']}>
-                                                Criar Conta
-                                            </Button>
-                                        </FormControl>
-                                    </center>
-                                </Stack>
+                            <Stack spacing={1} align={['flex-start', 'center']} w='full'>
+                                <Heading as="h2" size="xl" mt={6} mb={2}>
+                                    Cadastro
+                                </Heading>
+                                <Text as="h2" size="xl" mt={6} mb={2}>
+                                    Prossiga com o seu cadastro preenchendo os dados abaixo
+                                </Text>
                             </Stack>
-                        </center>
-                    </Box>
-                </flex>
-            </div>
+                        </Stack>
+                        <Box>
+                            <center py={6}>
+                                <Stack
+                                    borderWidth="1px"
+                                    borderRadius="lg"
+                                    w={{ sm: '100%', md: '540px' }}
+                                    bg={useColorModeValue('white', 'gray.900')}
+                                    boxShadow={'2xl'}
+                                >
+                                    <Stack
+                                        direction={['column', 'row']}
+                                        spacing={6}
+                                        align={'center'}
+                                        justify={'center'}>
+                                        <center
+                                            lineHeight={1.1}
+                                            fontSize={{ base: '2xl', sm: '3xl' }}
+                                        >
+                                            <FormControl isRequired>
+                                                <FormLabel> Email:
+                                                </FormLabel>
+                                                <Input
+                                                    id='email'
+                                                    type='email'
+                                                    value={user.email}
+                                                    readOnly />
+                                            </FormControl>
 
+                                        </center>
+                                    </Stack>
+                                    <Stack
+                                        direction={['column', 'row']}
+                                        spacing={6} align={'center'}
+                                        justify={'center'}
+                                    >
+                                        <center
+                                            id='fornecedor'
+                                            hidden={true}
+                                            align={['flex-start', 'center']}>
+                                            <Stack >
+                                                <Button bg={'blue.400'}
+                                                    color={'white'}
+                                                    w="full"
+                                                    _hover={{
+                                                        bg: 'blue.500',
+                                                    }} size='xs' onClick={isConsumidor}>
+                                                    Criar Conta como Consumidor:
+                                                </Button>
+                                            </Stack>
+                                            <FormControl isRequired>
+                                                <FormLabel> Nome Fantasia:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Nome: '
+                                                    id='nomeFantasia' />
+
+                                                <FormLabel> CNPJ:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Ex: XXXXXXXXXXXXXXXXXX'
+                                                    id='cnpj' />
+
+                                                <FormLabel> Telefone:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Ex: 19999999999'
+                                                    id='telefoneFornecedor' />
+
+                                                <FormLabel> Hora Abre:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Ex: 08:00:00 '
+                                                    id='hora_abre'
+                                                    type='time' />
+
+                                                <FormLabel> Hora Fecha:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Ex: 20:00:00 '
+                                                    id='hora_fecha'
+                                                    type='time' />
+
+                                                <Button
+                                                    colorScheme='teal'
+                                                    variant='outline'
+                                                    onClick=
+                                                    {() => { verificaFornecedor() }}
+                                                    align={['center']}>
+                                                    Criar Conta
+                                                </Button>
+                                            </FormControl>
+                                        </center>
+                                    </Stack>
+                                    <Stack direction={['column', 'row']} spacing={6} align={'center'}
+                                        justify={'center'}>
+                                        <center
+                                            id='consumidor'
+                                            bg='#F0FFF4'
+                                            align={['flex-start', 'center']}>
+                                            <Stack >
+                                                <Button bg={'red.400'}
+                                                    color={'white'}
+                                                    w="full"
+                                                    _hover={{
+                                                        bg: 'red.500',
+                                                    }} size='xs' onClick={isFornecedor}>
+                                                    Criar Conta como Fornecedor:
+                                                </Button>
+                                            </Stack>
+                                            <FormControl isRequired>
+                                                <FormLabel > Nome:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Nome: '
+                                                    id='nomeConsumidor' />
+
+                                                <FormLabel> CPF:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Ex: 12345678911'
+                                                    id='cpf' />
+
+                                                <FormLabel> Telefone:
+                                                </FormLabel>
+                                                <Input
+                                                    placeholder='Ex: 19999999999'
+                                                    id='telefoneConsumidor' />
+
+                                                <Button
+                                                    colorScheme='teal'
+                                                    variant='outline'
+                                                    onClick=
+                                                    {() => { verificaConsumidor() }}
+                                                    align={['center']}>
+                                                    Criar Conta
+                                                </Button>
+                                            </FormControl>
+                                        </center>
+                                    </Stack>
+                                </Stack>
+                            </center>
+                        </Box>
+                    </flex>
+                </div>
+
+            </Center>
         </>
     )
 }

@@ -1,25 +1,13 @@
 import {
-  FormControl,
-  FormLabel,
-  Input,
   Stack,
-  Checkbox,
-  Button,
-  useToast,
   Box,
-  VStack,
-  Heading,
   Text,
-  Grid,
   Link,
-  GridItem,
   useColorModeValue,
   Container,
-  Image, Img
 } from '@chakra-ui/react'
-import React, { useState } from 'react';
-import UseAuth from '../hooks/useAuth'
-import Axios from 'axios';
+import React from 'react';
+
 
 export default function Footer() {
 
