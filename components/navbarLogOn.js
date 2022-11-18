@@ -61,7 +61,7 @@ export default function navbarLogOff() {
         color={useColorModeValue('gray.700', 'gray.200')}>
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box p='2'>
-            <Heading fontSize='40px' ml='100'>GestON</Heading>
+            <Heading fontSize='40px' ml='300'>GestON</Heading>
           </Box>
           <Spacer />
           <ButtonGroup gap='2'>
@@ -77,36 +77,10 @@ export default function navbarLogOff() {
           </ButtonGroup>
           <Wrap>
             <WrapItem>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}>
-                  <Avatar
-                    src={user.photoURL}
-                  />
-                </MenuButton>
-                <MenuList alignItems={'center'}>
-                  <br />
-                  <Center>
-                    <Avatar
-                      size={'2xl'}
-                      src={user.photoURL}
-                    />
-                  </Center>
-                  <br />
-                  <Center>
-                    <p>Nome da Pessoa</p>
-                  </Center>
-                  <br />
-                  <MenuDivider />
-                  <MenuItem>Carrinho</MenuItem>
-                  <MenuItem>Abrir meu Perfil</MenuItem>
-                  <MenuItem onClick={() => { goHome() }} > Deslogar </MenuItem>
-                </MenuList>
-              </Menu>
+              <Avatar
+              marginRight={300}
+                src={user.photoURL}
+              />
             </WrapItem>
           </Wrap>
         </Flex>

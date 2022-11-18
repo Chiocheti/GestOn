@@ -114,12 +114,12 @@ export default function autentificado() {
     }
 
     function salva() {
-        var novoNomeFantasia = document.getElementById('nomeFantasia').value;
-        var novoTelefone = document.getElementById('telefone').value;
-        var telefoneFormatado = formatadorDeTelefone(novoTelefone);
+        var novoNomeFantasia = document.getElementById('nomeFantasia').value.trim();
+        var novoTelefone = document.getElementById('telefone').value.trim();
+        var telefoneFormatado = formatadorDeTelefone(novoTelefone).trim();
         var telefoneParaSalvar = null
-        var novoHora_abre = document.getElementById('hora_abre').value;
-        var novoHora_fecha = document.getElementById('hora_fecha').value;
+        var novoHora_abre = document.getElementById('hora_abre').value.trim();
+        var novoHora_fecha = document.getElementById('hora_fecha').value.trim();
 
         if (novoNomeFantasia == "" || novoNomeFantasia == null) {
             novoNomeFantasia = nomeFantasia

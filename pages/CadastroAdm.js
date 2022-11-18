@@ -48,12 +48,12 @@ export default function SplitScreen() {
 
     function cadastraADM() {
 
-        const nome = document.getElementById("nome").value;
-        const idFuncionario = document.getElementById("idFuncionario").value;
-        const telefone = document.getElementById("telefone").value;
-        const telefoneFormatado = formatadorDeTelefone(telefone);
-        const senha = document.getElementById("senha").value;
-        const confirmeSenha = document.getElementById("confirmeSenha").value;
+        const nome = document.getElementById("nome").value.trim();
+        const idFuncionario = document.getElementById("idFuncionario").value.trim();
+        const telefone = document.getElementById("telefone").value.trim();
+        const telefoneFormatado = formatadorDeTelefone(telefone).trim();
+        const senha = document.getElementById("senha").value.trim();
+        const confirmeSenha = document.getElementById("confirmeSenha").value.trim();
 
         console.log(telefoneFormatado);
         console.log(telefone);

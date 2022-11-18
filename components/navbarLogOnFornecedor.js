@@ -22,6 +22,7 @@ import {
     Stack
   } from '@chakra-ui/react'
   import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+  import { MdBuild } from "react-icons/md"
   import UseAuth from '../hooks/useAuth'
   import Router from "next/router";
   
@@ -64,7 +65,7 @@ import {
           color={useColorModeValue('gray.700', 'gray.200')}>
           <Flex minWidth='max-content' alignItems='center' gap='2'>
             <Box p='2'>
-              <Heading fontSize='40px' ml='100'>GestON</Heading>
+              <Heading fontSize='40px' ml='300'>GestON</Heading>
             </Box>
             <Spacer />
             <ButtonGroup gap='2'>
@@ -81,16 +82,19 @@ import {
             <Wrap>
               <WrapItem>
                 <Menu>
-                  <MenuButton
-                    as={Button}
-                    rounded={'full'}
-                    variant={'link'}
-                    cursor={'pointer'}
-                    minW={0}>
-                    <Avatar
-                      src={user.photoURL}
-                    />
-                  </MenuButton>
+                <MenuButton
+                  leftIcon={<MdBuild />}
+                  rightIcon={<MdBuild />}
+                  marginRight={300}
+                  as={Button}
+                  rounded={'full'}
+                  cursor={'pointer'}
+                  colorScheme='pink'
+                  variant='solid'
+                  width={220}
+                  minW={0}>
+                  Settings
+                </MenuButton>
                   <MenuList alignItems={'center'}>
                     <br />
                     <Center>
@@ -99,13 +103,7 @@ import {
                         src={user.photoURL}
                       />
                     </Center>
-                    <br />
-                    <Center>
-                      <p>Nome da Pessoa</p>
-                    </Center>
-                    <br />
                     <MenuDivider />
-                    
                     <MenuItem onClick={() => { goMyPerfil() }} >Abrir meu Perfil</MenuItem>
                     <MenuItem onClick={() => { goEditProduct() }} >Meus Produtos</MenuItem>
                     <MenuItem onClick={() => { goSuggest() }} >Cadastro de Produto</MenuItem>

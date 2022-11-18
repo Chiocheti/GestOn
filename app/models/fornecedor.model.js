@@ -68,6 +68,19 @@ Fornecedor.getAll = (result) => {
   });
 };
 
+Fornecedor.getAllIds = (result) => {
+  let query = "select idFornecedor from fornecedor;";
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Fornecedor: ", res);
+    result(null, res);
+  });
+};
+
 
 Fornecedor.updateById = (idFornecedor, fornecedor, result) => {
   sql.query(

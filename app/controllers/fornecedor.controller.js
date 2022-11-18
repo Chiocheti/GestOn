@@ -39,6 +39,17 @@ exports.findAll = (req, res) => {
   });
 };
 
+exports.findAllIds = (req, res) => {
+  Fornecedor.getAllIds((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving id Fornecedores."
+      });
+    else res.send(data);
+  });
+};
+
 // Find a single Fornecedor with a idFornecedor
 exports.findOneById = (req, res) => {
   Fornecedor.findById(req.params.idFornecedor, (err, data) => {

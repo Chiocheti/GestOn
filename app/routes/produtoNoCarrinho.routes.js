@@ -11,8 +11,8 @@ module.exports = app => {
     // Retrieve a single ProdutoNoCarrinho with idProdutoNoCarrinho
     router.get("/:idProdutoNoCarrinho", produtoNoCarrinho.findOneByIdProdutoNoCarrinho); //ok
 
-    // Retrieve a all ProdutoNoCarrinho with idProdutoDoFornecedor
-    router.get("/produto/:idProdutoDoFornecedor", produtoNoCarrinho.findAllByIdProdutoDoFornecedor);  //ok
+    // Retrieve a all ProdutoNoCarrinho with idProduto
+    router.get("/produto/:idProduto", produtoNoCarrinho.findAllByIdProduto);  //ok
 
     // Retrieve a all ProdutoNoCarrinho with idCarrinho
     router.get("/carrinho/:idCarrinho", produtoNoCarrinho.findAllByIdCarrinho);// ok
@@ -20,11 +20,11 @@ module.exports = app => {
     // Update a ProdutoNoCarrinho with idProdutoNoCarrinho
     router.put("/qtt/:idProdutoNoCarrinho", produtoNoCarrinho.updateTheQttById);
 
-    // Update a ProdutoNoCarrinho with idProdutoNoCarrinho
-    router.put("/custoTotal/:idProdutoNoCarrinho", produtoNoCarrinho.updateTheCustoTotalById);
-
     // Delete a ProdutoNoCarrinho with idProdutoNoCarrinho
     router.delete("/:idProdutoNoCarrinho", produtoNoCarrinho.deleteById);
+
+    // Delete a ProdutoNoCarrinho with idProdutoNoCarrinho
+    router.delete("/deletarThis/:idProduto/:idCarrinho", produtoNoCarrinho.deleteThis);
 
     // Delete a ProdutoNoCarrinho with idCarrinho
     router.delete("/carrinho/:idCarrinho", produtoNoCarrinho.deleteAllByIdCarrinho);

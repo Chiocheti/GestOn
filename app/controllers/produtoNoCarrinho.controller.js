@@ -9,10 +9,9 @@ exports.create = (req, res) => {
     }
     // Create a ProdutoNoCarrinho
     const produtoNoCarrinho = new ProdutoNoCarrinho({
-        idProdutoDoFornecedor: req.body.idProdutoDoFornecedor,
+        idProduto: req.body.idProduto,
         idCarrinho: req.body.idCarrinho,
         qtt: req.body.qtt,
-        custoTotalDoItem: req.body.custoTotalDoItem,
     });
     // Save ProdutoNoCarrinho in the database
     ProdutoNoCarrinho.create(produtoNoCarrinho, (err, data) => {
@@ -54,17 +53,17 @@ exports.findOneByIdProdutoNoCarrinho = (req, res) => {
     });
 };
 
-// Find a single ProdutoNoCarrinho with a idProdutoDoFornecedor
-exports.findAllByIdProdutoDoFornecedor = (req, res) => {
-    ProdutoNoCarrinho.findByIdProdutoDoFornecedor(req.params.idProdutoDoFornecedor, (err, data) => {
+// Find a single ProdutoNoCarrinho with a idProduto
+exports.findAllByIdProduto = (req, res) => {
+    ProdutoNoCarrinho.findByIdProduto(req.params.idProduto, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found ProdutoNoCarrinho with idProdutoDoFornecedor ${req.params.idProdutoDoFornecedor}.`
+                    message: `Not found ProdutoNoCarrinho with idProduto ${req.params.idProduto}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Error retrieving ProdutoNoCarrinho with idProdutoDoFornecedor " + req.params.idProdutoDoFornecedor
+                    message: "Error retrieving ProdutoNoCarrinho with idProduto " + req.params.idProduto
                 });
             }
         } else res.send(data);
@@ -116,34 +115,6 @@ exports.updateTheQttById = (req, res) => {
     );
 };
 
-// Update a ProdutoNoCarrinho identified by the idProdutoNoCarrinho in the request
-exports.updateTheCustoTotalById = (req, res) => {
-    // Validate Request
-    if (!req.body) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-    }
-    console.log(req.body);
-    ProdutoNoCarrinho.updateCustoTotalById(
-        req.params.idProdutoNoCarrinho,
-        new ProdutoNoCarrinho(req.body),
-        (err, data) => {
-            if (err) {
-                if (err.kind === "not_found") {
-                    res.status(404).send({
-                        message: `Not found ProdutoNoCarrinho with idProdutoNoCarrinho ${req.params.idProdutoNoCarrinho}.`
-                    });
-                } else {
-                    res.status(500).send({
-                        message: "Error updating ProdutoNoCarrinho with idProdutoNoCarrinho " + req.params.idProdutoNoCarrinho
-                    });
-                }
-            } else res.send(data);
-        }
-    );
-};
-
 // Delete a produtoNoCarrinho with the specified idProdutoNoCarrinho in the request
 exports.deleteById = (req, res) => {
     ProdutoNoCarrinho.removeById(req.params.idProdutoNoCarrinho, (err, data) => {
@@ -172,6 +143,23 @@ exports.deleteAllByIdCarrinho = (req, res) => {
             } else {
                 res.status(500).send({
                     message: "Could not delete produtoNoCarrinho with idCarrinho " + req.params.idCarrinho
+                });
+            }
+        } else res.send({ message: `produtoNoCarrinho was deleted successfully!` });
+    });
+};
+
+// Delete all produtoNoCarrinho with the specified idFornecedor in the request
+exports.deleteThis = (req, res) => {
+    ProdutoNoCarrinho.removeThis(req.params.idProduto , req.params.idCarrinho, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found ProdutoNoCarrinho with idProduto ${req.params.idProduto},idCarrinho ${req.params.idCarrinho}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Not found ProdutoNoCarrinho with idProduto ${req.params.idProduto},idCarrinho ${req.params.idCarrinho}`
                 });
             }
         } else res.send({ message: `produtoNoCarrinho was deleted successfully!` });

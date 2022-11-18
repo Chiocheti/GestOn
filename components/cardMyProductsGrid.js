@@ -24,7 +24,7 @@ import {
     DrawerContent,
     DrawerCloseButton,
     Checkbox,
-    useToast
+    Badge,
 } from '@chakra-ui/react';
 
 import { FcCurrencyExchange, FcInfo } from "react-icons/fc";
@@ -32,12 +32,17 @@ import { FcOrganization, FcApproval, FcCancel, FcCableRelease } from "react-icon
 
 import React, { useState } from 'react';
 import Tagss from './cardTagsEdit';
+import Categorias from './cardMyTagEdit';
 import Axios from 'axios';
 
 export default function cardMyProductsGrid({ produtoDoFornecedor }) {
     var [tags, setTags] = useState([1, 2]);
+    var [categorias, setCategorias] = useState([1, 2]);
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
+
+    console.log("Produto do Fornecedor")
+    console.log(produtoDoFornecedor)
 
     function loadTags() {
         document.getElementById('tagss').hidden = false;
@@ -50,11 +55,21 @@ export default function cardMyProductsGrid({ produtoDoFornecedor }) {
         Axios.request(options).then(function (response) {
             var tag = response.data
             setTags(() => tag);
-            console.log("tags: ")
-            console.log(tags);
 
         }).catch(function (error) {
             console.log("Erro do sistema: " + error);
+        });
+    }
+    async function loadCategoria() {
+
+        document.getElementById('cat').hidden = false;
+        var options = { method: 'GET', url: `http://localhost:3000/api/categoriasDoProduto/produto/${produtoDoFornecedor.idProdutoDoFornecedor}` };
+
+        await Axios.request(options).then(function (response) {
+            var cat = response.data
+            setCategorias(() => cat);
+        }).catch(function (error) {
+            console.error("Erro do sistema: " + error);
         });
     }
 
@@ -73,11 +88,11 @@ export default function cardMyProductsGrid({ produtoDoFornecedor }) {
                     <Button leftIcon={<FcCableRelease />} variant='outline' mr={3} onClick={loadTags}>
                         Mostrar Tags
                     </Button>
-                    <br/>
+                    <br />
                     <Checkbox defaultChecked>Produto em Estoque?</Checkbox>
                     <DrawerBody>
                         <div id='tagss' hidden>
-                        <Tagss tags={tags} produto={produtoDoFornecedor} />
+                            <Tagss tags={tags} produto={produtoDoFornecedor} />
                         </div>
                     </DrawerBody>
 
@@ -100,7 +115,9 @@ export default function cardMyProductsGrid({ produtoDoFornecedor }) {
                         src={produtoDoFornecedor.linkImg}
                     />
                 </Center>
-
+                <div id='cat' hidden>
+                    <Categorias categorias={categorias} />
+                </div>
                 <Box
                     mt='1'
                     fontWeight='semibold'
@@ -132,7 +149,9 @@ export default function cardMyProductsGrid({ produtoDoFornecedor }) {
                     <Spacer />
                     <AvatarGroup spacing='.5rem'>
                         <Avatar bg='teal.1000' icon={<FcOrganization fontSize='2.5rem' />} onClick={onOpen} />
-                        <Avatar bg='teal.1000' icon={<FcCurrencyExchange fontSize='2.5rem' />} />
+                        <Button leftIcon={<FcCurrencyExchange />} variant='outline' mr={1} onClick={loadCategoria}>
+
+                        </Button>
                     </AvatarGroup>
                 </Flex>
             </Box>

@@ -157,10 +157,10 @@ export default function criarConta() {
     }
 
     function verificaFornecedor() {
-        const telefone = document.getElementById("telefoneFornecedor").value;
-        const cnpj = document.getElementById("cnpj").value;
-        var telefoneFormatado = formatadorDeTelefone(telefone)
-        const nomeFantasia = document.getElementById("nomeFantasia").value;
+        const telefone = document.getElementById("telefoneFornecedor").value.trim();
+        const cnpj = document.getElementById("cnpj").value.trim();
+        var telefoneFormatado = formatadorDeTelefone(telefone).trim();
+        const nomeFantasia = document.getElementById("nomeFantasia").value.trim();
 
         if (cnpj.length != 14 || isNaN(cnpj)) {
             console.log("leng")
@@ -225,10 +225,10 @@ export default function criarConta() {
     }
 
     function verificaConsumidor() {
-        const cpf = document.getElementById("cpf").value;
-        const telefone = document.getElementById("telefoneConsumidor").value;
-        var telefoneFormatado = formatadorDeTelefone(telefone)
-        const nomeConsumidor = document.getElementById("nomeConsumidor").value;
+        const cpf = document.getElementById("cpf").value.trim();
+        const telefone = document.getElementById("telefoneConsumidor").value.trim();
+        var telefoneFormatado = formatadorDeTelefone(telefone).trim();
+        const nomeConsumidor = document.getElementById("nomeConsumidor").value.trim();
         if (cpf.length != 11 || isNaN(cpf) || !TestaCPF(cpf)) {
             toast({
                 title: 'Insira um CPF valido',
@@ -312,8 +312,8 @@ export default function criarConta() {
         await registerUsuario();
 
         var idConsumidor = null;
-        const nome = document.getElementById("nomeConsumidor").value;
-        const cpf = document.getElementById("cpf").value;
+        const nome = document.getElementById("nomeConsumidor").value.trim();
+        const cpf = document.getElementById("cpf").value.trim();
 
         const options = {
             method: 'GET',
@@ -353,9 +353,9 @@ export default function criarConta() {
         await registerUsuario();
 
         var idFornecedor = null;
-        const nomeFantasia = document.getElementById("nomeFantasia").value;
-        const hora_abre = document.getElementById("hora_abre").value;
-        const hora_fecha = document.getElementById("hora_fecha").value;
+        const nomeFantasia = document.getElementById("nomeFantasia").value.trim();
+        const hora_abre = document.getElementById("hora_abre").value.trim();
+        const hora_fecha = document.getElementById("hora_fecha").value.trim();
 
         const options = {
             method: 'GET',
@@ -399,6 +399,7 @@ export default function criarConta() {
                 h={'100vh'}
                 backgroundSize={'cover'}
                 backgroundPosition={'center center'}
+                marginBottom={100}
             >
                 <div
                     spacing={1}
@@ -475,7 +476,7 @@ export default function criarConta() {
                                                     _hover={{
                                                         bg: 'blue.500',
                                                     }} size='xs' onClick={isConsumidor}>
-                                                    Criar Conta como Consumidor:
+                                                    Clique aqui para criar Conta como Consumidor:
                                                 </Button>
                                             </Stack>
                                             <FormControl isRequired>
@@ -512,6 +513,7 @@ export default function criarConta() {
                                                     type='time' />
 
                                                 <Button
+                                                    marginY={5}
                                                     colorScheme='teal'
                                                     variant='outline'
                                                     onClick=
@@ -535,7 +537,7 @@ export default function criarConta() {
                                                     _hover={{
                                                         bg: 'red.500',
                                                     }} size='xs' onClick={isFornecedor}>
-                                                    Criar Conta como Fornecedor:
+                                                    Clique aqui para criar Conta como Fornecedor:
                                                 </Button>
                                             </Stack>
                                             <FormControl isRequired>
@@ -558,6 +560,7 @@ export default function criarConta() {
                                                     id='telefoneConsumidor' />
 
                                                 <Button
+                                                    marginY={5}
                                                     colorScheme='teal'
                                                     variant='outline'
                                                     onClick=
@@ -573,7 +576,6 @@ export default function criarConta() {
                         </Box>
                     </flex>
                 </div>
-
             </Center>
         </>
     )

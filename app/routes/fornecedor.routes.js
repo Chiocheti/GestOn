@@ -7,6 +7,9 @@ module.exports = app => {
   
   // Retrieve all fornecedores
   router.get("/", fornecedor.findAll); // OK
+
+  // Retrieve all fornecedores
+  router.get("/id", fornecedor.findAllIds); // OK
   
   // Retrieve a single fornecedor with id
   router.get("/:idFornecedor", fornecedor.findOneById); // OK

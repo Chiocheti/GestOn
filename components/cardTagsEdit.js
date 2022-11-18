@@ -6,6 +6,12 @@ import {
     import Item from './itemTagEdit'
     
     export default function card({ tags, produto }) {
+        console.log(" - Secundario - ")
+        console.log("-Tags-")
+        console.log(tags)
+        console.log("-Produto-")
+        console.log(produto)
+
         return (
             <>
                 <Box margin={'10px'}>

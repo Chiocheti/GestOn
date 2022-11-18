@@ -9,7 +9,7 @@ module.exports = app => {
     router.get("/", produtoDoFornecedor.findAll); 
     
     // Retrieve a single produtoDoFornecedor with idProdutoDoFornecedor
-    router.get("/:idProdutoDoFornecedor", produtoDoFornecedor.findOneById); 
+    router.get("/byId/:idProdutoDoFornecedor", produtoDoFornecedor.findOneById); 
     
     // Retrieve a single produtoDoFornecedor with idProdutoDoFornecedor
     router.get("/produto/:idProduto", produtoDoFornecedor.findOneByIdProduto); 
@@ -19,6 +19,9 @@ module.exports = app => {
 
     // Retrive all data from the produtoDoFornecedor and this product
     router.get("/getProduto/:idFornecedor", produtoDoFornecedor.findSomethingFromIdFornecedor); 
+
+    // Retrive all data from the produtoDoFornecedor and this product
+    router.get("/getAllProduto", produtoDoFornecedor.findAllThisFromIdFornecedor); 
     
     // Update a produtoDoFornecedor with idProdutoDoFornecedor
     router.put("/:idProdutoDoFornecedor", produtoDoFornecedor.update);

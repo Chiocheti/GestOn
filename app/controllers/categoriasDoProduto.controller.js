@@ -69,6 +69,22 @@ exports.findOneByIdProduto = (req, res) => {
     });
 };
 
+// Find a single CategoriasDoProduto by a idProdutoDoFornecedor
+exports.CountByIdProduto = (req, res) => {
+    CategoriasDoProduto.CountByIdProduto(req.params.idProdutoDoFornecedor, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found CategoriasDoProduto with idProdutoDoFornecedor ${req.params.idProdutoDoFornecedor}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving CategoriasDoProduto with idProdutoDoFornecedor " + req.params.idProdutoDoFornecedor
+                });
+            }
+        } else res.send(data);
+    });
+};
 // Find a single CategoriasDoProduto by a idProduto
 exports.findOneByIdCategoria = (req, res) => {
     CategoriasDoProduto.findByIdCategoria(req.params.idCategoria, (err, data) => {
@@ -104,7 +120,7 @@ exports.delete = (req, res) => {
 };
 
 // Delete a CategoriasDoProduto with the specified CategoriasDoProduto in the request
-exports.delete = (req, res) => {
+exports.deleteIdCategoria = (req, res) => {
     CategoriasDoProduto.removeFromIdCategoria(req.params.idCategoria, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {

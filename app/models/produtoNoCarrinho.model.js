@@ -1,10 +1,9 @@
 const sql = require("./db.js");
 // constructor
 const ProdutoNoCarrinho = function (produtoNoCarrinho) {
-    this.idProdutoDoFornecedor = produtoNoCarrinho.idProdutoDoFornecedor;
+    this.idProduto = produtoNoCarrinho.idProduto;
     this.idCarrinho = produtoNoCarrinho.idCarrinho;
     this.qtt = produtoNoCarrinho.qtt;
-    this.custoTotalDoItem = produtoNoCarrinho.custoTotalDoItem;
 };
 
 ProdutoNoCarrinho.create = (newProdutoNoCarrinho, result) => {
@@ -31,8 +30,8 @@ ProdutoNoCarrinho.findByIdProdutoNoCarrinho = (idProdutoNoCarrinho, result) => {
     });
 };
 
-ProdutoNoCarrinho.findByIdProdutoDoFornecedor = (idProdutoDoFornecedor, result) => {
-    sql.query(`SELECT * FROM produtoNoCarrinho WHERE idProdutoDoFornecedor = ${idProdutoDoFornecedor}`, (err, res) => {
+ProdutoNoCarrinho.findByIdProduto = (idProduto, result) => {
+    sql.query(`SELECT * FROM produtoNoCarrinho WHERE idProduto = ${idProduto}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(null, err);
@@ -89,27 +88,6 @@ ProdutoNoCarrinho.updateQttById = (idProdutoNoCarrinho, produtoNoCarrinho, resul
     );
 };
 
-ProdutoNoCarrinho.updateCustoTotalById = (idProdutoNoCarrinho, produtoNoCarrinho, result) => {
-    sql.query(
-        "UPDATE produtoNoCarrinho SET custoTotalDoItem = ? WHERE idProdutoNoCarrinho = ?",
-        [produtoNoCarrinho.custoTotalDoItem , idProdutoNoCarrinho],
-        (err, res) => {
-            if (err) {
-                console.log("error: ", err);
-                result(null, err);
-                return;
-            }
-            if (res.affectedRows == 0) {
-                // not found produtoNoCarrinho with the idProdutoNoCarrinho
-                result({ kind: "not_found" }, null);
-                return;
-            }
-            console.log("updated produtoNoCarrinho: ", { ...produtoNoCarrinho.custoTotalDoItem });
-            result(null, { ...produtoNoCarrinho.custoTotalDoItem });
-        }
-    );
-};
-
 ProdutoNoCarrinho.removeById = (idProdutoNoCarrinho, result) => {
     sql.query("DELETE FROM produtoNoCarrinho WHERE idProdutoNoCarrinho = ?", idProdutoNoCarrinho, (err, res) => {
         if (err) {
@@ -123,6 +101,23 @@ ProdutoNoCarrinho.removeById = (idProdutoNoCarrinho, result) => {
             return;
         }
         console.log("deleted ProdutoNoCarrinho with idProdutoNoCarrinho: ", idProdutoNoCarrinho);
+        result(null, res);
+    });
+};
+
+ProdutoNoCarrinho.removeThis = (idProduto , idCarrinho, result) => {
+    sql.query(`DELETE FROM produtoNoCarrinho WHERE idCarrinho = ${idCarrinho} and idProduto = ${idProduto};`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(null, err);
+            return;
+        }
+        if (res.affectedRows == 0) {
+            // not found produtoNoCarrinho with the idProdutoNoCarrinho
+            result({ kind: "not_found" }, null);
+            return;
+        }
+        console.log("deleted ProdutoNoCarrinho with idCarrinho: ", idCarrinho , "and idProduto: ", idProduto);
         result(null, res);
     });
 };

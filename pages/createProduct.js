@@ -134,6 +134,13 @@ export default function editProdrutro() {
                     duration: 3000,
                     isClosable: true,
                 })
+
+                document.getElementById("nome").value = "";
+                document.getElementById("descricao").value = "";
+                document.getElementById("descricaolonga").value = "";
+                document.getElementById("marca").value = "";
+                document.getElementById("imagem").value = "";
+
             }).catch(function (error) {
                 console.error(error);
             });

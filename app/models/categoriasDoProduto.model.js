@@ -46,6 +46,18 @@ CategoriasDoProduto.findByIdProduto = (idProdutoDoFornecedor , result) => {
   });
 };
 
+CategoriasDoProduto.CountByIdProduto = (idProdutoDoFornecedor , result) => {
+  sql.query(`SELECT COUNT(*) AS total FROM categoriasDoProduto WHERE idProdutoDoFornecedor = ${idProdutoDoFornecedor}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Count: ", res);
+    result(null, res);
+  });
+};
+
 CategoriasDoProduto.findByIdCategoria = (idCategoria , result) => {
   sql.query(`SELECT * FROM categoriasDoProduto WHERE idCategoria = ${idCategoria}`, (err, res) => {
     if (err) {

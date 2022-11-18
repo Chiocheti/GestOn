@@ -105,6 +105,23 @@ exports.findSomethingFromIdFornecedor = (req, res) => {
     });
 };
 
+// Find something from ProdutoDoFornecedor by a idFornecedor
+exports.findAllThisFromIdFornecedor = (req, res) => {
+    ProdutoDoFornecedor.findAllFromIdFornecedor((err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found list and produto ProdutoDoFornecedor.`
+                });
+            } else {
+                res.status(500).send({
+                    message: "Error retrieving list and produto ProdutoDoFornecedor."
+                });
+            }
+        } else res.send(data);
+    });
+};
+
 // Update a ProdutoDoFornecedor identified by the idProdutoDoFornecedor in the request
 exports.update = (req, res) => {
     // Validate Request

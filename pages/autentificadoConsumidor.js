@@ -71,6 +71,20 @@ export default function autentificadoConsumidor() {
         });
     }
 
+    function cadastraCarrinho() {
+        var options = {
+            method: 'POST',
+            url: 'http://localhost:3000/api/carrinho',
+            headers: { 'Content-Type': 'application/json' },
+            data: { idConsumidor: idC, precoTotal: "0", horaCotacao: "0000-00-00 00:00:00", horaFechamentoDoCarrinho: "0000-00-00 00:00:00" }
+        };
+        Axios.request(options).then(function (response) {
+            console.log(response.data);
+        }).catch(function (error) {
+            console.error(error);
+        });
+    }
+
     loadUser();
 
     return (
@@ -164,7 +178,10 @@ export default function autentificadoConsumidor() {
                                     }}>
                                     Home
                                 </Button>
-                                <Button onClick={() => Router.push('/authConsumidor')}
+                                <Button onClick={() => {
+                                    cadastraCarrinho();
+                                    Router.push('/authConsumidor');
+                                }}
                                     flex={1}
                                     fontSize={'sm'}
                                     rounded={'full'}
@@ -186,7 +203,6 @@ export default function autentificadoConsumidor() {
                         </Stack>
                     </Stack>
                 </Center>
-
             </Box>
         </div>
     )

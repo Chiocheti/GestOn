@@ -18,7 +18,7 @@ export default function componenteMyProducts({ produtos }) {
                 <SimpleGrid className='objetos' columns={5} spacing={2} mt={10} >
                     {
                         produtos.map((produto) => (
-                            <CardGrid key={produto.idProdutoDoFornecedor} produtoDoFornecedor={produto} 
+                            <CardGrid key={produto.idProdutoDoFornecedor} produtoDoFornecedor={produto}
                             />
                         ))
                     }

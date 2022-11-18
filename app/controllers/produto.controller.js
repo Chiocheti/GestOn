@@ -56,6 +56,55 @@ exports.findOneById = (req, res) => {
   });
 };
 
+// Find a single Produto with a idProduto
+exports.getProdutosDoCarrinho = (req, res) => {
+  Produto.getTheProdutosDoCarrinho(req.params.idCarrinho, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Produto with idCarrinho ${req.params.idCarrinho}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Produto with idCarrinho " + req.params.idCarrinho
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.getProdutosIdCarrinhoANDIdFornecedor = (req, res) => {
+  Produto.getTheProdutosIdCarrinhoANDIdFornecedor(req.params.idCarrinho, req.params.idFornecedor, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Produto with idCarrinho: ${req.params.idCarrinho} and idFornecedor: ${req.params.idFornecedor} .`
+        });
+      } else {
+        res.status(500).send({
+          message: `Error retrieving Produto with idCarrinho: ${req.params.idCarrinho} and idFornecedor: ${req.params.idFornecedor}`
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.soma = (req, res) => {
+  Produto.somarValores(req.params.idCarrinho, req.params.idFornecedor, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Produto with idCarrinho: ${req.params.idCarrinho} and idFornecedor: ${req.params.idFornecedor} .`
+        });
+      } else {
+        res.status(500).send({
+          message: `Error retrieving Produto with idCarrinho: ${req.params.idCarrinho} and idFornecedor: ${req.params.idFornecedor}`
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 // Find all Produto with a nome
 exports.getEveryLikeName = (req, res) => {
   Produto.getAllLikeName(req.params.nome, (err, data) => {

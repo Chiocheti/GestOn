@@ -140,9 +140,9 @@ export default function autentificado(text) {
     }
 
     function salva() {
-        var novoNome = document.getElementById('nome').value;
-        var novoTelefone = document.getElementById('telefone').value;
-        var telefoneFormatado = formatadorDeTelefone(novoTelefone);
+        var novoNome = document.getElementById('nome').value.trim();
+        var novoTelefone = document.getElementById('telefone').value.trim();
+        var telefoneFormatado = formatadorDeTelefone(novoTelefone).trim();
         var telefoneParaSalvar = null
 
         if (novoNome == "" || novoNome == null) {

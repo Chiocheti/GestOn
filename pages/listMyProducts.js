@@ -26,10 +26,9 @@ export default function App() {
         };
 
         Axios.request(options).then(function (response) {
-            console.log(response.data);
+            
             usuario = response.data;
-            console.log("Usuario: ");
-            console.log(usuario);
+            
             loadProdutos(usuario.id);
         }).catch(function (error) {
             console.log(error);
@@ -43,18 +42,15 @@ export default function App() {
             url: `http://localhost:3000/api/produtoDoFornecedor/getProduto/${id}`
         };
         Axios.request(options2).then(function (response) {
-            console.log(response.data);
+            
             var produtosLidos = response.data;
             setProdutos(() => produtosLidos)
-            console.log('produtosLidos ----------------');
-            console.log(produtos);
+            
 
         }).catch(function (error) {
             console.log(error);
         });
-
         document.getElementById("componente").hidden = false;
-
     }
 
     return (

@@ -58,7 +58,7 @@ export default function telaDoADM() {
 
     function loadTags() {
 
-        var lista = document.getElementById('tags');
+        var lista = document.getElementById('tags').trim();
         lista.hidden = false;
 
         const options = {
@@ -106,7 +106,7 @@ export default function telaDoADM() {
     }
 
     function mudaNome() {
-        var novoNome = document.getElementById('nome').value;
+        var novoNome = document.getElementById('nome').value.trim();
 
         if (novoNome.length < 1) {
             toast({
@@ -149,8 +149,8 @@ export default function telaDoADM() {
     }
 
     function mudaTelefone() {
-        var novoTelefone = document.getElementById('telefone').value;
-        var telefoneFormatado = formatadorDeTelefone(novoTelefone);
+        var novoTelefone = document.getElementById('telefone').value.trim();
+        var telefoneFormatado = formatadorDeTelefone(novoTelefone).trim();
 
         if (novoTelefone.length != 11 || isNaN(novoTelefone || !testaTelefone(telefoneFormatado))) {
             toast({
@@ -193,8 +193,8 @@ export default function telaDoADM() {
     }
 
     function mudaSenha() {
-        var novaSenha = document.getElementById('senha').value
-        var confirmaSenha = document.getElementById('confirmaSenha').value
+        var novaSenha = document.getElementById('senha').value.trim();
+        var confirmaSenha = document.getElementById('confirmaSenha').value.trim();
 
         if (novaSenha != confirmaSenha || novaSenha.length <= 1) {
             toast({
@@ -237,9 +237,9 @@ export default function telaDoADM() {
 
     function fazerLogin() {
 
-        var idFuncionarioLido = document.getElementById("validaIdFuncionario").value
+        var idFuncionarioLido = document.getElementById("validaIdFuncionario").value.trim();
         console.log(idFuncionarioLido)
-        var senhaLida = document.getElementById("validaSenha").value
+        var senhaLida = document.getElementById("validaSenha").value.trim();
         console.log(senhaLida)
 
         const options = {
@@ -290,7 +290,7 @@ export default function telaDoADM() {
     }
 
     async function cadastraCategoria() {
-        var nomeCategoria = document.getElementById("nomeCategoria").value
+        var nomeCategoria = document.getElementById("nomeCategoria").value.trim()
         console.log("Nome Categoria: " + nomeCategoria)
 
         if (validado) {
@@ -495,7 +495,7 @@ export default function telaDoADM() {
                                 <Stack w={'full'} maxW={'md'}>
                                     <FormControl >
                                         <Heading>Cadastrar Categoria</Heading>
-                                        <Input id='nomeCategoria' placeholder='Nome da Categoria: ' />
+                                        <Input id='nomeCategoria' placeholder='Nome da Categoria: ' maxlength='20' />
                                     </FormControl>
                                     <Button colorScheme={'teal'} variant={'solid'} onClick={() => { cadastraCategoria() }}>
                                         Cadastrar

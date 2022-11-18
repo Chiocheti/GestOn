@@ -54,6 +54,7 @@ ProdutoDoFornecedor.findThisSomethingFromIdFornecedor = (idFornecedor, result) =
   produto.descricaoCurta, 
   produto.linkImg, 
   produto.marca,
+  produto.idProduto,
   produtoDoFornecedor.idProdutoDoFornecedor,
   produtoDoFornecedor.preco, 
   produtoDoFornecedor.mostrar
@@ -61,6 +62,33 @@ ProdutoDoFornecedor.findThisSomethingFromIdFornecedor = (idFornecedor, result) =
   inner join produto
   on produtoDoFornecedor.idProduto = produto.idProduto
   where produtoDoFornecedor.idFornecedor =  ${idFornecedor}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("produtoDoFornecedor: ", res);
+    result(null, res);
+  });
+};
+
+ProdutoDoFornecedor.findAllFromIdFornecedor = (result) => {
+  sql.query(`
+  select produto.nome,
+  produto.descricaoLonga, 
+  produto.descricaoCurta, 
+  produto.linkImg, 
+  produto.marca,
+  produtoDoFornecedor.idProdutoDoFornecedor,
+  produtoDoFornecedor.preco, 
+  produtoDoFornecedor.mostrar,
+  fornecedor.nomeFantasia
+  from produtoDoFornecedor
+  inner join produto
+  on produtoDoFornecedor.idProduto = produto.idProduto
+  inner join fornecedor
+  on produtoDoFornecedor.idFornecedor = fornecedor.idFornecedor;
+  `, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

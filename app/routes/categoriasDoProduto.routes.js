@@ -15,13 +15,16 @@ module.exports = app => {
     router.get("/produto/:idProdutoDoFornecedor", categoriasDoProduto.findOneByIdProduto);
 
     // Retrieve a single categoriasDoProduto with idCategoriasDoProduto
+    router.get("/count/:idProdutoDoFornecedor", categoriasDoProduto.CountByIdProduto);
+
+    // Retrieve a single categoriasDoProduto with idCategoriasDoProduto
     router.get("/categoria/:idCategoria", categoriasDoProduto.findOneByIdCategoria);
 
     // Delete a categoriasDoProduto with idCategoriasDoProduto
     router.delete("/:idCategoriasDoProduto", categoriasDoProduto.delete);
 
     // Delete a categoriasDoProduto with idCategoria
-    router.delete("/categoria/:idCategoria", categoriasDoProduto.delete);
+    router.delete("/categoria/:idCategoria", categoriasDoProduto.deleteIdCategoria);
 
     // Delete all categoriasDoProduto
     router.delete("/", categoriasDoProduto.deleteAll);

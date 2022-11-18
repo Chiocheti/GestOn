@@ -49,6 +49,80 @@ Produto.getAllLikeName = (nome , result) => {
   });
 };
 
+Produto.getTheProdutosDoCarrinho = (idCarrinho , result) => {
+  sql.query(`
+  select produto.nome,
+  produto.descricaoLonga, 
+  produto.descricaoCurta, 
+  produto.linkImg, 
+  produto.marca,
+  produto.idProduto
+  from produto
+  inner join produtoNoCarrinho 
+  on produtoNoCarrinho.idProduto = produto.idProduto
+  where produtoNoCarrinho.idCarrinho = ${idCarrinho}` , (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Produtos: ", res);
+    result(null, res);
+  });
+};
+
+Produto.getTheProdutosIdCarrinhoANDIdFornecedor = (idCarrinho , idFornecedor , result) => {
+sql.query(`
+select produto.idProduto,
+produtoDoFornecedor.idProdutoDoFornecedor,
+produtoDoFornecedor.idFornecedor,
+produtoDoFornecedor.preco,
+produto.nome,
+produto.descricaoLonga, 
+produto.descricaoCurta, 
+produto.linkImg, 
+produto.marca
+from produtoDoFornecedor
+inner join produto
+on produto.idProduto = produtoDoFornecedor.idProduto
+inner join produtoNoCarrinho
+on produtoNoCarrinho.idProduto = produto.idProduto
+inner join carrinho
+on produtoNoCarrinho.idCarrinho = carrinho.idCarrinho
+where carrinho.idCarrinho = ${idCarrinho} and produtoDoFornecedor.idFornecedor = ${idFornecedor};` , (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Produtos: ", res);
+    result(null, res);
+  });
+};
+
+Produto.somarValores = (idCarrinho , idFornecedor , result) => {
+sql.query(`
+select nomeFantasia, SUM(preco) as "valor"
+from produtoDoFornecedor
+inner join produto
+on produto.idProduto = produtoDoFornecedor.idProduto
+inner join produtoNoCarrinho
+on produtoNoCarrinho.idProduto = produto.idProduto
+inner join carrinho
+on produtoNoCarrinho.idCarrinho = carrinho.idCarrinho
+inner join fornecedor
+on produtoDoFornecedor.idFornecedor = fornecedor.idFornecedor
+where carrinho.idCarrinho = ${idCarrinho} and produtoDoFornecedor.idFornecedor = ${idFornecedor}` , (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Produtos: ", res);
+    result(null, res);
+  });
+};
+
 Produto.getAll = (result) => {
   let query = "SELECT * FROM produto";
   sql.query(query, (err, res) => {

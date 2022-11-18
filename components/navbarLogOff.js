@@ -57,7 +57,7 @@ export default function navbarLogOff() {
   }
   async function authConsumidor() {
     await signin();
-    Router.push('/authConsumidor');
+    Router.push('/parteConsumidor/indexConsumidor');
   }
 
   async function LoginADM() {
@@ -80,7 +80,7 @@ export default function navbarLogOff() {
         color={useColorModeValue('gray.700', 'gray.200')}>
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box p='2'>
-            <Heading fontSize='40px' ml='50'>GestON</Heading>
+            <Heading fontSize='40px' marginLeft='300'>GestON</Heading>
           </Box>
           <Spacer />
 
@@ -96,7 +96,7 @@ export default function navbarLogOff() {
               _hover={{ bg: 'orange.500' }}> Home</Button>
           </ButtonGroup>
           <Menu>
-            <MenuButton as={Button} mr='30'>
+            <MenuButton as={Button} mr='300'>
               Login/Register
             </MenuButton>
             <MenuList>

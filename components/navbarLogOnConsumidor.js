@@ -21,6 +21,7 @@ import {
   Stack
 } from '@chakra-ui/react'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { MdBuild } from "react-icons/md"
 import UseAuth from '../hooks/useAuth'
 import Router from "next/router";
 
@@ -59,7 +60,7 @@ export default function navbarLogOnConsumidor() {
         color={useColorModeValue('gray.700', 'gray.200')}>
         <Flex minWidth='max-content' alignItems='center' gap='2'>
           <Box p='2'>
-            <Heading fontSize='40px' ml='100'>GestON</Heading>
+            <Heading fontSize='40px' marginLeft='300'>GestON</Heading>
           </Box>
           <Spacer />
           <ButtonGroup gap='2'>
@@ -71,20 +72,22 @@ export default function navbarLogOnConsumidor() {
               </Stack>
             </Flex>
             <Button colorScheme='orange.400' onClick={() => goHome()} bg={'orange.400'}
-              _hover={{ bg: 'orange.500' }}> Home</Button>
+              _hover={{ bg: 'orange.500' }}> Home </Button>
           </ButtonGroup>
           <Wrap>
             <WrapItem>
               <Menu>
                 <MenuButton
+                  leftIcon={<MdBuild />}
+                  rightIcon={<MdBuild />}
+                  marginRight={300}
                   as={Button}
-                  rounded={'full'}
-                  variant={'link'}
                   cursor={'pointer'}
+                  bg={'pink.600'}
+                  variant='solid'
+                  width={220}
                   minW={0}>
-                  <Avatar
-                    src={user.photoURL}
-                  />
+                  Settings
                 </MenuButton>
                 <MenuList alignItems={'center'}>
                   <br />
@@ -94,15 +97,12 @@ export default function navbarLogOnConsumidor() {
                       src={user.photoURL}
                     />
                   </Center>
-                  <br />
-                  <Center>
-                    <p>Nome da Pessoa</p>
-                  </Center>
-                  <br />
                   <MenuDivider />
-                  <MenuItem onClick={()=>{Router.push("/cotacao")}}> Cotação</MenuItem>
-                  <MenuItem onClick={()=>{Router.push("/authConsumidor")}}>Abrir meu Perfil</MenuItem>
-                  <MenuItem onClick={()=>{Router.push("/enderecosDoConsumidor")}}>Endereços</MenuItem>
+                  <MenuItem onClick={() => { Router.push("/parteConsumidor/indexConsumidor") }}> Pesquisar </MenuItem>
+                  <MenuItem onClick={() => { Router.push("/parteConsumidor/cotacaoConsumidor") }}> Produtos Salvos </MenuItem>
+                  <MenuItem onClick={() => { Router.push("/parteConsumidor/cotadoConsumidor") }}> Fazer Cotação </MenuItem>
+                  <MenuItem onClick={() => { Router.push("/authConsumidor") }}>Abrir meu Perfil</MenuItem>
+                  <MenuItem onClick={() => { Router.push("/enderecosDoConsumidor") }}>Endereços</MenuItem>
                   <MenuItem>Favoritos</MenuItem>
                   <MenuItem onClick={() => { goHome() }}> Deslogar </MenuItem>
                 </MenuList>
